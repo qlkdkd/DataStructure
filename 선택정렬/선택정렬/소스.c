@@ -28,7 +28,7 @@ int find_min(int data[], int start, int n)
 int main()
 {
 	int i, n, tmp;
-	printf("Á¤·Ä Àü: ");
+	printf("ì •ë ¬ ì „: ");
 	print_data(data, N_DATA);
 
 	for (i = 0; i < N_DATA; i++) {
@@ -39,6 +39,7 @@ int main()
 		data[n] = tmp;
 	}
 
-	printf("Á¤·Ä ÈÄ: ");
+	printf("ì •ë ¬ í›„: ");
 	print_data(data, N_DATA);
+	return 0;
 }
