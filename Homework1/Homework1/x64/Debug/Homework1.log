@@ -1,0 +1,5 @@
+﻿  Homework1.c
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\Homework1\Homework1\Homework1.c(13,1): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\Homework1\Homework1\Homework1.c(15,1): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\Homework1\Homework1\Homework1.c(16,1): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+  Homework1.vcxproj -> C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\Homework1\x64\Debug\Homework1.exe
