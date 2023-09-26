@@ -136,4 +136,47 @@ else:
 [stack.c](https://github.com/qlkdkd/DataStruct/blob/main/week5/week5_stack/week5_stack/stack.c)
 
 ### 구조체 배열 사용하기
+[stack_struck.c](https://github.com/qlkdkd/DataStruct/blob/main/week5/stack_struckArray/Project1/stack_struck.c)
 
+### 일반적인 배열 스택 프로그램
+[stack_array.c](https://github.com/qlkdkd/DataStruct/blob/main/week5/stack_array/stack_array/stack_array.c)
+
+### 동적 스택
+[stack_Malloc.c](https://github.com/qlkdkd/DataStruct/blob/main/week5/Stack_malloc/Stack_malloc/stackMalloc.c)
+
+### 동적 배열 스택
+* malloc()을 호출하여 실행 시간에 메모리를 할당 받아서 스택을 생성한다.
+```c
+typedef int element;
+typedef struct{
+  element *data; //data는 포인터로 정의된다.
+  int capacity; //현재 크기
+  int top;
+}StackType;
+```
+
+* 스택이 만들어질 때 1개의 요소를 저장할 수 있는 공간을 일단 확보한다.
+```c
+//스택 생성 함수
+void init_stack(StackType *s){
+  s->top=-1;
+  s->capacity=1;
+  s->data=(element *)malloc(s->capacity*sizeof(element));
+}
+
+//스택 삭제 함수
+void delete(StackType *s){
+  free(s);
+}
+```
+
+* 가장 큰 변화가 있는 함수는 `push()`이다. 공간이 부족하면 메모리를 2배로 더 확보한다.
+```c
+void push(StackType *s, element item){
+  if(is_full(s)){
+    s->capacity*=2;
+    s->data=(element *)realloc(s->data, s->capacity * sizeof(element))
+  }
+  s->data[++(s->top)]=item;
+}
+``` 
