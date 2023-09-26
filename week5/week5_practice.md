@@ -1,4 +1,4 @@
-[이론](https://github.com/qlkdkd/DataStruct/blob/main/week5/week5_practice.md)
+[이론](https://github.com/qlkdkd/DataStruct/blob/main/week5/readme.md)
 
 # (실습 4) 동적 메모리할당
 
