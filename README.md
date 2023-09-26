@@ -7,7 +7,7 @@
 
 [4주차]()
 
-[5주차]([https://github.com/qlkdkd/DataStruct/blob/main/week5/Week5.md](https://github.com/qlkdkd/DataStruct/tree/main/week5))
+[5주차]([https://github.com/qlkdkd/DataStruct/blob/main/week5/Week5.md](https://github.com/qlkdkd/DataStruct/tree/main/week5)
 
 
 # 연습문제
