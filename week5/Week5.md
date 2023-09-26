@@ -181,3 +181,4 @@ void push(StackType *s, element item){
 }
 ``` 
 * 동적 배열 스택 프로그램
+* [stack_mallocArray.c](https://github.com/qlkdkd/DataStruct/blob/main/week5/Stack_mallocArray/Stack_mallocArray/mallocArray.c)
