@@ -6,4 +6,4 @@
 * 특징_**후입선출(LIFO: Last-in-First-Out)**: 가장 최근에 들어온 데이터가 가장 먼저 나감.
 
 * 스택의 구조
-![Uploading image.png…]()
+<img src="바탕화면/대학/2학년2학기/자료구조/images/5_1.png">
