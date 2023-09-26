@@ -1,4 +1,6 @@
-(실습 4) 동적 메모리할당
+[이론](https://github.com/qlkdkd/DataStruct/blob/main/week5/week5_practice.md)
+
+# (실습 4) 동적 메모리할당
 
 내용: 아래와 같은 구조체를 사용하여 다음의 작업을 하시오.
 ```
