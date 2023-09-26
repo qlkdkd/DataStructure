@@ -1,13 +1,13 @@
 (실습 4) 동적 메모리할당
 
 내용: 아래와 같은 구조체를 사용하여 다음의 작업을 하시오.
-
+```
 typedef struct student_info {
     char name[10];
     int height;
     float weight;
 } student_info;
-
+```
     1) 동적할당으로 4명의 학생정보를 저장할 공간을 할당 받으시오.
 
     2) 사용자로부터 4명의 학생정보를 입력받아서 할당받은 공간에 저장하시오.
