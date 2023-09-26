@@ -182,3 +182,13 @@ void push(StackType *s, element item){
 ``` 
 * 동적 배열 스택 프로그램
 * [stack_mallocArray.c](https://github.com/qlkdkd/DataStruct/blob/main/week5/Stack_mallocArray/Stack_mallocArray/mallocArray.c)
+
+---
+
+### 스택의 응용: 괄호 검사
+
+* 괄호의 종류: 대괄호 **('[', ']')**, 중괄호 **('{', '}')**, 소괄호 **('(', ')')**
+* 조건
+  1. 왼쪽 괄호의 개수와 오른쪽 괄호의 개수가 같아야 한다.
+  2. 같은 괄호에서 왼쪽 괄호는 오른쪽 괄호보다 먼저 나와야 한다.
+  3. 괄호 사이에는 포함 관계만 존재한다.
