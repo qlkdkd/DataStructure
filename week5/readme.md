@@ -1,3 +1,5 @@
+[연습](https://github.com/qlkdkd/DataStruct/blob/main/week5/week5_practice.md)
+
 # Week5_Stack
 
 ## 스택이란?
