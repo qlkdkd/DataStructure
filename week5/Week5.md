@@ -180,3 +180,4 @@ void push(StackType *s, element item){
   s->data[++(s->top)]=item;
 }
 ``` 
+* 동적 배열 스택 프로그램
