@@ -133,7 +133,7 @@ else:
 
 ### 전역 변수로 구하는 방법
 
-<week5/week5_stack/week5_stack/stack.c>
+[stack.c](https://github.com/qlkdkd/DataStruct/blob/main/week5/week5_stack/week5_stack/stack.c)
 
 ### 구조체 배열 사용하기
 
