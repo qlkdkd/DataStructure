@@ -192,3 +192,41 @@ void push(StackType *s, element item){
   1. 왼쪽 괄호의 개수와 오른쪽 괄호의 개수가 같아야 한다.
   2. 같은 괄호에서 왼쪽 괄호는 오른쪽 괄호보다 먼저 나와야 한다.
   3. 괄호 사이에는 포함 관계만 존재한다.
+* 잘못된 괄호 사용의 예
+    (a(b)
+    a(b)c)
+    a{b(c[d]e)}f)
+
+  ### 스택을 이용한 괄호 검사
+  ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/66eae533-489c-4769-94be-e87831191194)
+
+  ### 알고리즘
+* 알고리즘의 개요
+  * 문자열에 있는 괄호를 차례대로 조사하면서 왼쪽 괄호를 만나면 스택에 삽입하고, 오른쪽 괄호를 만나면 스택에서 top 괄호를 삭제한 후 오른쪽 괄호와 짝이 맞는지를 검사한다.
+  * 이때, 스택이 비어 있으면 조건 1 또는 조건 2 등을 위해하게 되고 괄호의 짝이 맞지 않으면 조건 3 등에 위배된다.
+  * 마지막 괄호까지를 조사한 후에도 스택에 괄호가 남아 있으면 조건 1에 위배되므로 0(거짓)을 반환하고 그렇지 않으면 1(참)을 반환한다.
+ 
+  ### 괄호 검사 알고리즘
+
+```
+check_matching(expr):
+
+while(입력 expr이 끝이 아니면)
+ch <-expr의 다음 글자
+switch(ch)
+  case '(': case '[': case '{':
+    ch를 스택에 삽입
+    break
+  case ')': case ']', case '}':
+    if(스택이 비어있으면)
+      then 오류
+    else 스택에서 open_ch를 꺼낸다.
+    if(ch와 open_ch가 같은 짝이 아니면)
+      then 오류 보고
+  break
+if(스택이 비어있지 않으면)
+then(오류)
+```
+
+### 괄호 검사 프로그램
+[parantheseCheck.c](https://github.com/qlkdkd/DataStruct/blob/main/week5/ParenthesesCheckProgram/ParenthesesCheckProgram/ParenthesesCheck.c)
