@@ -8,3 +8,54 @@
 * 스택의 구조
 ![5_1](https://github.com/qlkdkd/DataStruct/assets/71871927/ed86df2a-d794-4ab3-9776-2b228f47bf70)
 
+### 예제: 시스템 스택을 이용한 함수 호출
+
+```c
+void func2(){
+  return;
+}
+
+void func1(){
+  func2()
+}
+
+int main(){
+  func1()
+  return 0;
+}
+```
+
+![5_2](https://github.com/qlkdkd/DataStruct/assets/71871927/b7a78a71-77d9-4a04-821d-e72451cae4f1)
+
+### 스택 추상 데이터 타입(ADT)
+* 객체: 0개 이상의 원소를 가지는 유한 선형 리스트
+* 연산:
+  * `create(size)`::= 최대 크기가 size인 공백 스택을 생성한다.
+    
+  * `is_full(s)`::=
+    ```c
+    if(스택의 원소 수==size) return TRUE;
+    else return FALSE;
+    ```
+  * `is_empty(s)`::=
+    ```c
+    if(스택의 원소 수==0) return TRUE;
+    else return FALSE;
+    ```
+  * `push(s, item)`::=
+    ```c
+    if(is_full(s))return ERROR_STACKFULL;
+    else 스택의 맨 위의 원소를 제거해서 반환한다.
+    ```
+
+  * `pop(s)`::=
+    ```c
+    if(is_empty(s)) return ERROR_STACKEMPTY;
+    else 스택의 맨 위의 원소를 제거해서 반환한다.
+    ```
+
+  * `peek(s)`::=
+    ```c
+    if(is_empty(s)) return ERROR_STACKEMPTY;
+    else 스택의 맨 위의 원소를 제거하지 않고 반환한다.
+    ```
