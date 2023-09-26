@@ -83,7 +83,7 @@ int main(){
   * 스택이 공백 상태이면 `top`=$-1$
   ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/0bdd6e64-ba78-4015-b256-214468e04f46)
 
-### is_empty, is_full 연산의 구현
+### is_empty, is_full, push, pop 연산의 구현
 
 ```
 //is_empty의 계산
@@ -102,3 +102,34 @@ if top==(MAX_STACK_SIZE-1)
   then return TRUE
 else return FALSE
 ```
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/2e280427-68bd-4f92-b1ba-43d62fab8262)
+
+```
+//push의 연산
+push(s, x):
+
+if is_full(s):
+  then error "overflow"
+else:
+  top+=1
+  stack[top]=x
+```
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/4f8686c2-8015-4184-9867-337809117918)
+
+```
+//pop의 연산
+pop(s, x):
+
+if is_empty(s):
+  then error "underflow"
+else:
+  e=stack[top]
+  top-=1
+  return e
+```
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/7717b913-80a8-4b06-9e71-60983ba7ad52)
+
+---
+
+### 전역 변수로 구하는 방법
+
