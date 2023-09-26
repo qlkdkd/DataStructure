@@ -1,0 +1,3 @@
+﻿  circulation.c
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\week4\circulation\circulation\circulation.c(22): warning C4715: 'power': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  circulation.vcxproj -> C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\week4\circulation\x64\Debug\circulation.exe
