@@ -75,11 +75,30 @@ int main(){
 
   ---
 
-  ### 배열을 이용한 스택의 구현
+### 배열을 이용한 스택의 구현
 
   * 1차원 배열 `stack[]`
   * 스택에서 가장 최근에 입력되었던 자료를 가리기는 `top` 변수
   * 가장 먼저 들어온 요소는 `stack[0]`에, 가장 최근에 들어온 요소는 `stack[top]`에 저장
   * 스택이 공백 상태이면 `top`=$-1$
-  <img align="right", src="https://github.com/qlkdkd/DataStruct/assets/71871927/4d2c4911-61d8-4c8c-8108-28b781f92153">
+  ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/0bdd6e64-ba78-4015-b256-214468e04f46)
 
+### is_empty, is_full 연산의 구현
+
+```
+//is_empty의 계산
+is_empty(s):
+
+if top==-1
+  then return TURE
+else return FALSE
+```
+
+```
+//is_full의 계산
+is_full(s):
+
+if top==(MAX_STACK_SIZE-1)
+  then return TRUE
+else return FALSE
+```
