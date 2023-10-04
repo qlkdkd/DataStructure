@@ -63,5 +63,12 @@ printf("%d", &p);
 
 ### 포인터 연산자
 * 포인터에 관련된 연산자는 다음과 같은 2가지이다.
-    #### * 주소 연산자(&)
-    #### * 간접 참조 연산자(*)
+    #### 주소 연산자(&)
+    #### 간접 참조 연산자(*)
+* 예제1[example1.c](https://github.com/qlkdkd/DataStruct/blob/main/%ED%8F%AC%EC%9D%B8%ED%84%B0/example1/example1/FileName.c)
+> 결과
+> 변수 number의 주소: 261093460
+포인터의 값: 261093460
+변수 number의 값: 10
+포인터가 가리키는 값: 10
+* 예제2[example2.c](https://github.com/qlkdkd/DataStruct/blob/main/%ED%8F%AC%EC%9D%B8%ED%84%B0/example2/example2/FileName.c)
