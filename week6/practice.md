@@ -8,7 +8,7 @@
         add(x, y, &sum); 
         printf("sum=%d\n",sum);
 
-       ![20200930010009_pointer_add](https://github.com/qlkdkd/DataStruct/assets/71871927/976f4a3e-372e-42df-8737-174ee9200831)
+![20200930010009_pointer_add](https://github.com/qlkdkd/DataStruct/assets/71871927/976f4a3e-372e-42df-8737-174ee9200831)
 
 
     2) 포인터 변수 num을 선언하고 malloc 으로 10개의 정수를 저장할 공간을 확보한 후 해당 변수에
@@ -25,7 +25,7 @@
        ...
        ...
 
-      ![20200930010931_num_add](https://github.com/qlkdkd/DataStruct/assets/71871927/07082198-c432-4ee0-bd69-7664e4076302)
+![20200930010931_num_add](https://github.com/qlkdkd/DataStruct/assets/71871927/07082198-c432-4ee0-bd69-7664e4076302)
 
 
     3) 두 개의 문자열을 합치는 프로그램을 작성하시오.
@@ -39,7 +39,7 @@
         concat(p, str1, str2);
         printf("%s \n",p);
 
-        ![20200930012447_concat](https://github.com/qlkdkd/DataStruct/assets/71871927/74b4aa55-7847-4abc-8916-38df75de906f)
+![20200930012447_concat](https://github.com/qlkdkd/DataStruct/assets/71871927/74b4aa55-7847-4abc-8916-38df75de906f)
 
 
     4) 두 개의 문자열을 저장하는 배열이 있다. 하나의 포인터 변수가 두 개의 문자열 중 하나를 
