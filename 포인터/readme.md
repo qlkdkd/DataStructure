@@ -162,6 +162,7 @@ int main(){
 }
 ```
 > swap() 호출 전: a=10, b=20
+>
 > swap() 호출 후: a=20, b=10
 
 * **포인터를 이용**
@@ -182,6 +183,7 @@ int main(){
 }
 ```
 > swap() 호출 전: a=100, b=200
+> 
 > swap() 호출 후: a=200, b=100
 
 ---
@@ -214,3 +216,24 @@ int main(){
     return 0;
 }
 ```
+### 포인터 자료형과 변수의 자료형이 다른 경우
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/8871b28a-84c9-46d8-9826-6df17170e12c)
+
+---
+
+### 배열과 포인터
+* 배열과 포인터는 아주 밀접한 관계를 가지고 있다.
+* 배열 이름이 바로 포인터다.
+* 포인터는 배열처럼 사용이 가능하다.
+
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/80cd70fd-4d11-434c-afef-a9c6bf13339a)
+
+[예제](https://github.com/qlkdkd/DataStruct/blob/main/%ED%8F%AC%EC%9D%B8%ED%84%B0/%ED%8F%AC%EC%9D%B8%ED%84%B0%EC%99%80%20%EB%B0%B0%EC%97%B4/%ED%8F%AC%EC%9D%B8%ED%84%B0%EC%99%80%20%EB%B0%B0%EC%97%B4/FileName.c)
+> 결과
+>
+>
+> 배열의 이름: 527431272
+> 첫 번째 원소의 주소: 10
+
+### 포인터를 배열처럼 사용
+* 포인터도 배열 이름처럼 간주될 수 있고 배열과 똑같이 사용할 수 있다.
