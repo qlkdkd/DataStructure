@@ -37,6 +37,8 @@ final_result <- pop(s);
 ### 후위표기식 계산
 [후위표기식_계산.c](https://github.com/qlkdkd/DataStruct/blob/main/week6/%ED%9B%84%EC%9C%84%ED%91%9C%EA%B8%B0%EC%8B%9D_%EA%B3%84%EC%82%B0/%ED%9B%84%EC%9C%84%ED%91%9C%EA%B8%B0%EC%8B%9D_%EA%B3%84%EC%82%B0/FileName.c)
 
+---
+
 ### 중위표기식 -> 후위표기식
 
 * 중위표기와 후위표기
@@ -50,3 +52,63 @@ final_result <- pop(s);
 a+b|ab+
 (a+b)*c|ab+c*
 a+b*c|abc*
+
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/1d3a8698-f0fe-4ed1-bdf0-6f694591f2f6)
+
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/a839070e-f7ca-4af4-a503-61b1fbac9014)
+
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/a1f01621-03b5-491b-91f7-29b068660f17)
+
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/7e1d4b9f-b03f-4acd-a105-10638da04212)
+
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/defa80dc-4f4d-4203-a843-1c4cff3e029c)
+
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/b84ca241-6293-4a0b-9359-237db0942c56)
+
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/d28ea85c-d82b-4739-967a-5ccc001e5cbb)
+
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/7dbc645b-2694-427d-9163-45d071c57349)
+
+### 중위표기 수식을 후위 표기 수식으로 변환하는 알고리즘
+```
+infix_to_postfix(exp):
+
+스택 s를 생성하고 초기화
+while(exp에 처리할 문자가 남아있으면)
+  ch <- 다음에 처리할 문자
+  switch(ch)
+    case 연산자:
+      while (peek(s)의 우선순위 >= ch의 우선순위)
+        do(e_) <- pop(s)
+          e를 출력
+      push(s, ch)
+      break;
+    case 왼쪽 괄호:
+      push(s, ch)
+      break;
+    case 오른쪽 괄호:
+      e <- pop(s);
+      while(e!=왼쪽 괄호)
+        do e를 출력
+          e <- pop(s)
+      break;
+    case 피연산자:
+      ch를 출력
+      break;
+  while(not is_empty(s))
+    do e <- pop(s)
+      e를 출력
+```
+### 프로그램
+[중위표기to후위표기.c](https://github.com/qlkdkd/DataStruct/blob/main/week6/%EC%A4%91%EC%9C%84%ED%91%9C%EA%B8%B0to%ED%9B%84%EC%9C%84%ED%91%9C%EA%B8%B0/%EC%A4%91%EC%9C%84%ED%91%9C%EA%B8%B0to%ED%9B%84%EC%9C%84%ED%91%9C%EA%B8%B0/FileName.c)
+
+---
+
+### 스택의 응용: 미로 탐색 문제
+* 체계적인 방법 필요
+* 현재의 위치에서 가능한 방향을 스택에 저장해놓았다가 막다른 길을 만나면 스택에서 마음 탐색 위치를 꺼낸다.
+
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/e4fa7660-d1e0-4f97-8a4c-e9218cbb0310)
+
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/d8d97f82-c165-4583-b77e-9eb18fec3f09)
+
