@@ -1,24 +1,17 @@
 #include<stdio.h>
+#include<stdlib.h>
 
-void set_pointer(char** pointer, int index) {
-    if (index == 0) {
-        *pointer = "Hello";
-    }
-    else if (index == 1) {
-        *pointer = "World";
-    }
-    else {
-        pointer = NULL;
-    }
+char strings[2][10]={"Hello", "World"};
+
+void set_pointer(char **p, int n){
+    *p=strings[n];
 }
 
-int main() {
-    char strings[2][10] = { "Hello", "World" };
-    char* p;
-
+int main(){
+    char *p;
     set_pointer(&p, 0);
-    printf("%s \n", p);
+    printf("%s\n", p);
     set_pointer(&p, 1);
-    printf("%s \n", p);
+    printf("%s\n", p);
     return 0;
 }
