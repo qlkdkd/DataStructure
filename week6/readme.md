@@ -19,3 +19,17 @@
 * (예) 82/3-32*+
 
 ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/df13dd8e-027a-431b-bee2-1a18c6fafbc6)
+
+### 후위 표기식 계산 알고리즘
+
+```
+스택 s를 생성하고 초기화한다.
+for 항목 in 후위표기식
+  do if(항목이 피연산자이면)
+    push(s, item)
+  if(항목이 연산자 op이면)
+    then second <- pop(s)
+    result <- first op second //op는 +-*/ 중 하나
+    push(s, result)
+final_result <- pop(s);
+```
