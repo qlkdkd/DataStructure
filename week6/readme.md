@@ -124,3 +124,6 @@ while(현재의 위치가 출구가 아니면) do
   else 스택에서 하나의 위치를 꺼내어 현재 위치로 만든다.;
 성공;
 ```
+
+### 미로 탐색 프로그램
+[미로찾기.c](https://github.com/qlkdkd/DataStruct/blob/main/week6/%EB%AF%B8%EB%A1%9C%EC%B0%BE%EA%B8%B0/%EB%AF%B8%EB%A1%9C%EC%B0%BE%EA%B8%B0/FileName.c)
