@@ -10,7 +10,6 @@
 
 ![20200930010009_pointer_add](https://github.com/qlkdkd/DataStruct/assets/71871927/976f4a3e-372e-42df-8737-174ee9200831)
 [답안 보기](https://github.com/qlkdkd/DataStruct/blob/main/week6/practice6_1/practice6_1/FileName.c)
-![image](https://github.com/qlkdkd/DataStruct/assets/71871927/ac49f6f9-a86a-44a4-aa68-7448e57f3e72)
 
 
 
@@ -30,6 +29,7 @@
 
 ![20200930010931_num_add](https://github.com/qlkdkd/DataStruct/assets/71871927/07082198-c432-4ee0-bd69-7664e4076302)
 
+[답안 보기](https://github.com/qlkdkd/DataStruct/blob/main/week6/practice6_2/practice6_2/FileName.c)
 
     3) 두 개의 문자열을 합치는 프로그램을 작성하시오.
 
@@ -44,6 +44,7 @@
 
 ![20200930012447_concat](https://github.com/qlkdkd/DataStruct/assets/71871927/74b4aa55-7847-4abc-8916-38df75de906f)
 
+[답안 보기](https://github.com/qlkdkd/DataStruct/blob/main/week6/practice6_3/practice6_3/FileName.c)
 
     4) 두 개의 문자열을 저장하는 배열이 있다. 하나의 포인터 변수가 두 개의 문자열 중 하나를 
        가리키게 하는 함수 set_pointer 프로그램을 작성하시오.
@@ -58,5 +59,5 @@
 
  ![20200930012503_double_pointer](https://github.com/qlkdkd/DataStruct/assets/71871927/246930b5-cdd6-44d0-862d-72ca8cd0c32c)
 
-
+[답안 보기](https://github.com/qlkdkd/DataStruct/blob/main/week6/practice6_4/practice6_4/FileName.c)
        
