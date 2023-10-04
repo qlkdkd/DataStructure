@@ -36,3 +36,17 @@ final_result <- pop(s);
 
 ### 후위표기식 계산
 [후위표기식_계산.c](https://github.com/qlkdkd/DataStruct/blob/main/week6/%ED%9B%84%EC%9C%84%ED%91%9C%EA%B8%B0%EC%8B%9D_%EA%B3%84%EC%82%B0/%ED%9B%84%EC%9C%84%ED%91%9C%EA%B8%B0%EC%8B%9D_%EA%B3%84%EC%82%B0/FileName.c)
+
+### 중위표기식 -> 후위표기식
+
+* 중위표기와 후위표기
+    * 중위표기법과 후위표기법의 공통점은 피연산자의 순서는 동일
+    * 연산자들의 순서만 다름(우선순위순서)
+  > 연산자만 스택에 저장했다가 출력하면 된다.
+  > 2+3*4 -> 234*+
+
+중위표기법|후위표기법
+|---|---|
+a+b|ab+
+(a+b)*c|ab+c*
+a+b*c|abc*
