@@ -9,6 +9,7 @@
 
 [5주차](https://github.com/qlkdkd/DataStruct/tree/main/week5)
 
+[6주차](https://github.com/qlkdkd/DataStruct/tree/main/week6)
 
 # 연습문제
 [2주차]()
