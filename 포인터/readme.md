@@ -68,7 +68,49 @@ printf("%d", &p);
 * 예제1[example1.c](https://github.com/qlkdkd/DataStruct/blob/main/%ED%8F%AC%EC%9D%B8%ED%84%B0/example1/example1/FileName.c)
 > 결과
 > 변수 number의 주소: 261093460
-포인터의 값: 261093460
-변수 number의 값: 10
-포인터가 가리키는 값: 10
+> 포인터의 값: 261093460
+> 변수 number의 값: 10
+> 포인터가 가리키는 값: 10
+
 * 예제2[example2.c](https://github.com/qlkdkd/DataStruct/blob/main/%ED%8F%AC%EC%9D%B8%ED%84%B0/example2/example2/FileName.c)
+> 결과
+> 변수 number의 값: 10
+> 변수 number의 값: 20
+
+---
+
+포인터 연산
+* 가능한 연산: 증가, 감소, 덧셈, 뻴셈 연산
+* 증가 연산의 경우 증가되는 값은 포인터가 가리키는 객체의 크기
+> 포인터의 증가는 일반 변수와는 약간 다르다. 가리키는 객체의 크기만큼 증가한다.
+
+포인터 타입|++연산 후 증가되는 값
+---|---
+char|1
+short|2
+int|4
+float|4
+double|8
+
+* 증가 연산 예제: [증가연산예제.c](https://github.com/qlkdkd/DataStruct/blob/main/%ED%8F%AC%EC%9D%B8%ED%84%B0/%EC%A6%9D%EA%B0%80%EC%97%B0%EC%82%B0%EC%98%88%EC%A0%9C/%EC%A6%9D%EA%B0%80%EC%97%B0%EC%82%B0%EC%98%88%EC%A0%9C/FileName.c)
+> 결과(코드는 링크 참조)
+> 증가 전 pc: 10000, pi: 10000, pd: 10000
+> 증가 후 pc: 10001, pi: 10004, pd: 10008
+
+---
+
+### 포인터의 증감 연산
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/f6fe9863-6785-4d7f-939b-f5f25b258968)
+
+### 간접 참조 연산자와 증감 연산자
+* *p++;
+    * p가 가리키는 위치에서 값을 가져온 후에 p를 증가한다.
+* (*p)++;
+    * p가 가리키는 위치의 값을 증가한다.
+
+ 수식|의미
+ ---|---
+ v=*p++|p가 가리키는 값을 v에 대입한 후에 p를 증가한다.
+ v=(*p)++|p가 가리키는 값을 v에 대입한 후에 가리키는 값을 증가한다.
+ v=*++p|p를 증가시킨 후에 p가 가리키는 값을 v에 대입한다.
+ v=++*p|p를 가리키는 값을 가져온 후에 그 값을 증가하여 v에 대입한다.
