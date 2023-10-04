@@ -1,3 +1,5 @@
+[연습문제 보러가기](https://github.com/qlkdkd/DataStruct/blob/main/week6/practice.md)
+
 ### 수식의 계산
 * 전위(prefix), 중위(infix), 후위(postfix)
 
