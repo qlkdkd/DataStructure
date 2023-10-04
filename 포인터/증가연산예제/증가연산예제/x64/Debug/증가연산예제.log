@@ -1,0 +1,14 @@
+﻿  FileName.c
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\복습1_포인터\증가연산예제\증가연산예제\FileName.c(10,9): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'char *'입니다.
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\복습1_포인터\증가연산예제\증가연산예제\FileName.c(10,9): warning C4313: 'printf': 서식 문자열의 '%d'이(가) char *' 형식의 인수 1과(와) 충돌합니다.
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\복습1_포인터\증가연산예제\증가연산예제\FileName.c(10,9): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 2의 형식이 'int *'입니다.
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\복습1_포인터\증가연산예제\증가연산예제\FileName.c(10,9): warning C4313: 'printf': 서식 문자열의 '%d'이(가) int *' 형식의 인수 2과(와) 충돌합니다.
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\복습1_포인터\증가연산예제\증가연산예제\FileName.c(10,9): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 3의 형식이 'double *'입니다.
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\복습1_포인터\증가연산예제\증가연산예제\FileName.c(10,9): warning C4313: 'printf': 서식 문자열의 '%d'이(가) double *' 형식의 인수 3과(와) 충돌합니다.
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\복습1_포인터\증가연산예제\증가연산예제\FileName.c(16,9): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'char *'입니다.
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\복습1_포인터\증가연산예제\증가연산예제\FileName.c(16,9): warning C4313: 'printf': 서식 문자열의 '%d'이(가) char *' 형식의 인수 1과(와) 충돌합니다.
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\복습1_포인터\증가연산예제\증가연산예제\FileName.c(16,9): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 2의 형식이 'int *'입니다.
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\복습1_포인터\증가연산예제\증가연산예제\FileName.c(16,9): warning C4313: 'printf': 서식 문자열의 '%d'이(가) int *' 형식의 인수 2과(와) 충돌합니다.
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\복습1_포인터\증가연산예제\증가연산예제\FileName.c(16,9): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 3의 형식이 'double *'입니다.
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\복습1_포인터\증가연산예제\증가연산예제\FileName.c(16,9): warning C4313: 'printf': 서식 문자열의 '%d'이(가) double *' 형식의 인수 3과(와) 충돌합니다.
+  증가연산예제.vcxproj -> C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\복습1_포인터\증가연산예제\x64\Debug\증가연산예제.exe
