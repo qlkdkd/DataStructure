@@ -33,3 +33,6 @@ for 항목 in 후위표기식
     push(s, result)
 final_result <- pop(s);
 ```
+
+### 후위표기식 계산
+[후위표기식_계산.c](https://github.com/qlkdkd/DataStruct/blob/main/week6/%ED%9B%84%EC%9C%84%ED%91%9C%EA%B8%B0%EC%8B%9D_%EA%B3%84%EC%82%B0/%ED%9B%84%EC%9C%84%ED%91%9C%EA%B8%B0%EC%8B%9D_%EA%B3%84%EC%82%B0/FileName.c)
