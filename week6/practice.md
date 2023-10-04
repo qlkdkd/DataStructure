@@ -9,6 +9,9 @@
         printf("sum=%d\n",sum);
 
 ![20200930010009_pointer_add](https://github.com/qlkdkd/DataStruct/assets/71871927/976f4a3e-372e-42df-8737-174ee9200831)
+[답안 보기](https://github.com/qlkdkd/DataStruct/blob/main/week6/practice6_1/practice6_1/FileName.c)
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/ac49f6f9-a86a-44a4-aa68-7448e57f3e72)
+
 
 
     2) 포인터 변수 num을 선언하고 malloc 으로 10개의 정수를 저장할 공간을 확보한 후 해당 변수에
