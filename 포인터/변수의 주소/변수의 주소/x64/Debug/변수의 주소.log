@@ -1,0 +1,9 @@
+﻿  FileName.c
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\복습1_포인터\변수의 주소\변수의 주소\FileName.c(8,9): warning C4477: 'printf' : 서식 문자열 '%u'에 'unsigned int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'int *'입니다.
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\복습1_포인터\변수의 주소\변수의 주소\FileName.c(8,9): warning C4313: 'printf': 서식 문자열의 '%u'이(가) int *' 형식의 인수 1과(와) 충돌합니다.
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\복습1_포인터\변수의 주소\변수의 주소\FileName.c(9,9): warning C4477: 'printf' : 서식 문자열 '%u'에 'unsigned int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'char *'입니다.
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\복습1_포인터\변수의 주소\변수의 주소\FileName.c(9,9): warning C4313: 'printf': 서식 문자열의 '%u'이(가) char *' 형식의 인수 1과(와) 충돌합니다.
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\복습1_포인터\변수의 주소\변수의 주소\FileName.c(10,9): warning C4477: 'printf' : 서식 문자열 '%u'에 'unsigned int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'float *'입니다.
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\복습1_포인터\변수의 주소\변수의 주소\FileName.c(10,9): warning C4313: 'printf': 서식 문자열의 '%u'이(가) float *' 형식의 인수 1과(와) 충돌합니다.
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\복습1_포인터\변수의 주소\변수의 주소\FileName.c(6,8): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+  변수의 주소.vcxproj -> C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\복습1_포인터\변수의 주소\x64\Debug\변수의 주소.exe
