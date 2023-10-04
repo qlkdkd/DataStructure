@@ -17,3 +17,5 @@
 ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/693075fc-7d12-450d-ad54-9407b594929c)
 * 수식을 왼쪽에서 오른쪽으로 스캔하여 피연산자이면 스택에 저장하고 연산자이면 필요한 수만큼의 피연산자를 스택에서 꺼내 연산을 실행하고 연산의 결과를 다시 스택에 저장
 * (예) 82/3-32*+
+
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/df13dd8e-027a-431b-bee2-1a18c6fafbc6)
