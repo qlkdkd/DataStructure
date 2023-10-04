@@ -231,9 +231,77 @@ int main(){
 [예제](https://github.com/qlkdkd/DataStruct/blob/main/%ED%8F%AC%EC%9D%B8%ED%84%B0/%ED%8F%AC%EC%9D%B8%ED%84%B0%EC%99%80%20%EB%B0%B0%EC%97%B4/%ED%8F%AC%EC%9D%B8%ED%84%B0%EC%99%80%20%EB%B0%B0%EC%97%B4/FileName.c)
 > 결과
 >
->
 > 배열의 이름: 527431272
+> 
 > 첫 번째 원소의 주소: 10
 
 ### 포인터를 배열처럼 사용
 * 포인터도 배열 이름처럼 간주될 수 있고 배열과 똑같이 사용할 수 있다.
+
+[코드 직접 보기](https://github.com/qlkdkd/DataStruct/blob/main/%ED%8F%AC%EC%9D%B8%ED%84%B0/%ED%8F%AC%EC%9D%B8%ED%84%B0%EC%99%80%20%EB%B0%B0%EC%97%B4_2/%ED%8F%AC%EC%9D%B8%ED%84%B0%EC%99%80%20%EB%B0%B0%EC%97%B4_2/FileName.c)
+```c
+#include<stdio.h>
+
+int main() {
+	int a[] = { 10, 20, 30, 40, 50 };
+	int* p;
+
+	p = a;
+	printf("배열의 값: \n");
+	for (int i = 0; i < 5; i++) {
+		printf("a[%d]=%d ", i, a[i]);
+	}
+	printf("\n");
+
+	printf("배열의 주소: \n");
+	for (int i = 0; i < 5; i++) {
+		printf("p[%d]=%d ", i, p[i]);
+	}
+	printf("\n");
+
+	return 0;
+}
+```
+>결과
+> 배열의 값:
+>
+> a[0]=10 a[1]=20 a[2]=30 a[3]=40 a[4]=50
+>
+> 배열의 주소:
+>
+> p[0]=10 p[1]=20 p[2]=30 p[3]=40 p[4]=50
+
+---
+
+### 어디에 사용될까?
+[직접 보기](https://github.com/qlkdkd/DataStruct/blob/main/%ED%8F%AC%EC%9D%B8%ED%84%B0/%ED%8F%AC%EC%9D%B8%ED%84%B0%20%EC%82%AC%EC%9A%A9%EC%B2%98/%ED%8F%AC%EC%9D%B8%ED%84%B0%20%EC%82%AC%EC%9A%A9%EC%B2%98/FileName.c)
+```c
+#include<stdio.h>
+
+void sub(int* ptr) {
+	printf("%d\n", ptr[10]);
+}
+
+int main() {
+	int large_data[20];
+	for (int i = 0; i < 20; i++)
+		large_data[i] = i + 1;
+	sub(large_data);
+	return 0;
+}
+```
+>결과
+>
+> 11
+
+---
+
+### Lab: 유용한 배열 함수 작성
+* 정수 배열에 대하여 평균을 계산하고 배열을 출력하는 함수를 작성하고 사용해보자.
+    * double get_array_avg(int values[], int n); 정수 배열을 받앗 배열 요소의 평균값을 계산하여 반환한다.
+    * void print_array(int values[], int n); 정수 배열을 받아서 배열 요소들을 출력한다.
+
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/63d9db82-598e-463a-a4d9-cde0f5629570)
+
+### Sol
+[코드 보기](https://github.com/qlkdkd/DataStruct/blob/main/%ED%8F%AC%EC%9D%B8%ED%84%B0/%ED%8F%AC%EC%9D%B8%ED%84%B0%20%EC%82%AC%EC%9A%A9%EC%B2%98/%ED%8F%AC%EC%9D%B8%ED%84%B0%20%EC%82%AC%EC%9A%A9%EC%B2%98/FileName.c)
