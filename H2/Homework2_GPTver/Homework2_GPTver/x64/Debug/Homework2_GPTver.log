@@ -1,0 +1,14 @@
+﻿  FileName.c
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\Homework2_GPTver\Homework2_GPTver\FileName.c(67,23): warning C4048: 배열 첨자가 다릅니다. 'int (*)[100]'과(와) 'int [3][3]'
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\Homework2_GPTver\Homework2_GPTver\FileName.c(68,23): warning C4048: 배열 첨자가 다릅니다. 'int (*)[100]'과(와) 'int [3][3]'
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\Homework2_GPTver\Homework2_GPTver\FileName.c(71,20): warning C4048: 배열 첨자가 다릅니다. 'int (*)[100]'과(와) 'int [3][3]'
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\Homework2_GPTver\Homework2_GPTver\FileName.c(71,30): warning C4048: 배열 첨자가 다릅니다. 'int (*)[100]'과(와) 'int [3][3]'
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\Homework2_GPTver\Homework2_GPTver\FileName.c(78,23): warning C4048: 배열 첨자가 다릅니다. 'int (*)[100]'과(와) 'int [3][3]'
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\Homework2_GPTver\Homework2_GPTver\FileName.c(79,23): warning C4048: 배열 첨자가 다릅니다. 'int (*)[100]'과(와) 'int [3][3]'
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\Homework2_GPTver\Homework2_GPTver\FileName.c(82,20): warning C4048: 배열 첨자가 다릅니다. 'int (*)[100]'과(와) 'int [3][3]'
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\Homework2_GPTver\Homework2_GPTver\FileName.c(82,30): warning C4048: 배열 첨자가 다릅니다. 'int (*)[100]'과(와) 'int [3][3]'
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\Homework2_GPTver\Homework2_GPTver\FileName.c(89,23): warning C4048: 배열 첨자가 다릅니다. 'int (*)[100]'과(와) 'int [3][3]'
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\Homework2_GPTver\Homework2_GPTver\FileName.c(90,23): warning C4048: 배열 첨자가 다릅니다. 'int (*)[100]'과(와) 'int [3][3]'
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\Homework2_GPTver\Homework2_GPTver\FileName.c(93,20): warning C4048: 배열 첨자가 다릅니다. 'int (*)[100]'과(와) 'int [3][3]'
+C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\Homework2_GPTver\Homework2_GPTver\FileName.c(93,30): warning C4048: 배열 첨자가 다릅니다. 'int (*)[100]'과(와) 'int [3][3]'
+  Homework2_GPTver.vcxproj -> C:\Users\sdh05\Desktop\대학\2학년 2학기\자료구조\Homework2_GPTver\x64\Debug\Homework2_GPTver.exe
