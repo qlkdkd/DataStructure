@@ -32,7 +32,7 @@ SparseMatrix y3 = { {{0,1,5},{0,2,8},{1,2,4},{2,0,4},{2,2,1}}, 3, 3, 5};
 동작화면
 ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/a53ad84f-8893-421c-adb2-a7e9dc64b140)
 
-[GPT 코드](https://github.com/qlkdkd/DataStruct/blob/main/H2/Homework2_GPTver/Homework2_GPTver/FileName.c) 
+[결과 코드](https://github.com/qlkdkd/DataStruct/blob/main/H2/Homework2/Homework2/FileName.c) 
 
 * 참고한 사이트
     *[행렬곱을 구하는 알고리즘](https://nate9389.tistory.com/62)
