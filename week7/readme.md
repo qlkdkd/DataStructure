@@ -152,5 +152,5 @@ rear <- (rear-1+MAX_QUEUE_SIZE)%MAX_QUEUE_SIZE;
 ```
 ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/470f6526-d08c-4bf8-a43c-e4610e7f962a)
 
-## 덱 프로그램(https://github.com/qlkdkd/DataStruct/blob/main/week7/%EB%8D%B1/%EB%8D%B1/FileName.c)
+## [덱 프로그램](https://github.com/qlkdkd/DataStruct/blob/main/week7/%EB%8D%B1/%EB%8D%B1/FileName.c)
 ## 큐의 응용: 시뮬레이
