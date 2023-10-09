@@ -85,7 +85,7 @@ f. dequeue(): front가 [1]번 배열로 이동한다.
 ## 원형큐의 동작
 ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/57776888-03d6-4e1d-b56e-71539b141536)
 ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/e7de7133-5d61-4af8-8123-1382f4e529bd)
-* 공백 상태: `front==rear``
+* 공백 상태: `front==rear`
 * 포화상태: `front%M==(rear+1)%M`
 * 공백상태화 포화상태를 구별하기 위하여 하나의 공간은 항상 비워둔다.
     * 한 자리를 비워주지 않는다면 (c) 오류상태 처럼 되어 공백 상태와 포화 상태를 구별할 수가 없다.
