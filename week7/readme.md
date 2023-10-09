@@ -99,4 +99,58 @@ f. dequeue(): front가 [1]번 배열로 이동한다.
 * CPU 스케줄링: 운영체제는 실행 가능한 프로세스들을 저장하거나 이벤트를 기다리는 프로세스들을 저장하기 위하여 몇 개의 큐를 사용한다.
 ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/9418ceec-9da8-4353-8a00-4962fd70f44f)
 
-## [큐 응용 프로그램]()
+## [큐 응용 프로그램](https://github.com/qlkdkd/DataStruct/blob/main/week7/%ED%81%90%20%EC%9D%91%EC%9A%A9%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8/%ED%81%90%20%EC%9D%91%EC%9A%A9%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8/FileName.c)
+
+---
+
+## 덱(deque)
+* 덱(deque)은 **double-ended queue**의 줄임말로서 큐의 전단(front)와 후단(rear)에서 모두 삽입과 삭제가 가능한 큐를 의미한다.
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/3404f92e-6ca6-4439-91a5-d0ffb3d0e0b8)
+
+## 덱의 추상 자료형
+> * 객체: n개의 element형으로 구성된 요소들의 순서있는 모임
+> * 연산
+> create()::= 덱을 생성한다.
+> init(dq)::= 덱을 초기화한다.
+> is_empty(dq)::= 덱이 공백상태인지를 검사한다.
+> is_full(dq)::= 덱이 포화상태인지를 확인한다.
+> add_front(dq, e)::= 덱의 앞에 요소를 추가한다.
+> add)rear(dq, e)::= 덱의 뒤에 요소를 추가한다.
+> delete_front(dq)::= 덱의 앞에 있는 요소를 반환한 다음 삭제한다.
+> delete_rear(dq)::= 덱의 뒤에 있는 요소를 반환한 다음 삭제한다.
+> get_front(q)::= 덱의 앞에서 삭제하지 않고 앞에 있는 요소를 반환한다.
+> get_rear(q)::= 덱의 뒤에서 삭제하지 않고 뒤에 있는 요소를 반환한다.
+
+## 덱의 연산
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/ce650467-253f-4ad6-ab0d-e2b99ead9af8)
+* 덱은 스택과 큐의 연산들을 모두 가지고 있다.
+deque|stack|queue
+---|---|---
+add_front, delete_front|push, pop|
+add_rear, delete_rear||enqueue, dequeue
+
+* 추가로 덱은 get_front, get_rear, delete_rear 연산을 갖는다.
+
+## 배열을 이용한 덱의 구현
+원형 큐를 확장하면 덱도 손쉽게 구현할 수 있음. 덱도 원형 큐와 같이 전단과 후단을 사용함. 따라서 큐에서 사용한 배열 data와 front, rear를 그대로 사용하면 되고, 추가적인 데이터는 필요 없음
+```c
+#define max_deque_size 5
+typedef int element
+typedef struct{//덱 타입
+  element data[max_deque_size];
+  int front, rear;
+}DequeType;
+```
+* 덱의 연산에는 원형 큐에서 그대로 사용할 수 있는 많은 연산들이 있음
+* 추가된 연산: delete_rear(), add_front(), get_rear()
+    * get_rear(): 공백상태가 아닌 경우 rear가 가리키는 항목 반환
+    * delete_rear(), add_front(): 덱은 원형 큐와 다르게 반대 방향의 회전이 필요하다. front와 rear를 감소시켜야 하는데, 만약 음수가 되면 max_queue_size를 더해주어야 한다. 따라서 front나 rear는 아래와 같이 변경된다.
+
+```c
+front <- (front-1+MAX_QUEUE_SIZE)%MAX_QUEUE_SIZE;
+rear <- (rear-1+MAX_QUEUE_SIZE)%MAX_QUEUE_SIZE;
+```
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/470f6526-d08c-4bf8-a43c-e4610e7f962a)
+
+## 덱 프로그램(https://github.com/qlkdkd/DataStruct/blob/main/week7/%EB%8D%B1/%EB%8D%B1/FileName.c)
+## 큐의 응용: 시뮬레이
