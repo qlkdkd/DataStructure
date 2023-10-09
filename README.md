@@ -11,6 +11,8 @@
 
 [6주차](https://github.com/qlkdkd/DataStruct/tree/main/week6)
 
+[7주차](https://github.com/qlkdkd/DataStruct/tree/main/week7)
+
 [지난학기 복습: 포인터]()
 
 # 연습문제
