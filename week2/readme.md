@@ -6,7 +6,8 @@
 
 ## 팩토리얼 프로그래밍 #1
 * 팩토리얼 정의
-$n!=\left\{\begin{matrix}
+
+$$n!=\left\{\begin{matrix}
 1(n=0)\\
 n*(n-1)! \\
-\end{matrix}\right.$
+\end{matrix}\right.$$
