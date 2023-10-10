@@ -167,4 +167,4 @@ rear <- (rear-1+MAX_QUEUE_SIZE)%MAX_QUEUE_SIZE;
 5.  `clock`이 하나 증가했으므로 'service_time`을 하나 감소시킨다.
 6. 만약 `service_time`이 0이면 현재 서비스받는 고객이 없다는 것을 의미한다. 따라서 큐에서 고객 구조체를 하나 꺼내어 서비스를 시작한다.
 
-## [은행 시뮬레이션 프로그램]()
+## [은행 시뮬레이션 프로그램](https://github.com/qlkdkd/DataStruct/blob/main/week7/%EC%9D%80%ED%96%89%20%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8/%EC%9D%80%ED%96%89%20%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8/FileName.c)
