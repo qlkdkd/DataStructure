@@ -1,7 +1,7 @@
 # 강의 자료
 [1주차]()
 
-[2주차]()
+[2주차](https://github.com/qlkdkd/DataStruct/tree/main/week2)
 
 [3주차]()
 
