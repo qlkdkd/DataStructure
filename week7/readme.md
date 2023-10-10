@@ -1,3 +1,4 @@
+[실습: 스택](https://github.com/qlkdkd/DataStruct/blob/main/week7/%EC%8B%A4%EC%8A%B56_%EC%8A%A4%ED%83%9D.md)
 # 5장. 큐(Queue)
 ## 큐
 * 큐: 먼저 들어온 데이터가 먼저 나가는 자료구조
