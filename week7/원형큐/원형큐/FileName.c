@@ -2,36 +2,36 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-//¿øÇüÅ¥ ÄÚµå ½ÃÀÛ
+//ì›í˜•í ì½”ë“œ ì‹œì‘
 #define max_queue_size 5
 typedef int element;
-typedef struct {//Å¥Å¸ÀÔ
+typedef struct {//ííƒ€ì…
 	element data[max_queue_size];
 	int front, rear;
 }QueueType;
 
-//¿À·ùÇÔ¼ö
+//ì˜¤ë¥˜í•¨ìˆ˜
 void error(char* message) {
 	fprintf(stderr, "%s\n", message);
 	exit(1);
 }
 
-//°ø¹é »óÅÂ °ËÃâ ÇÔ¼ö
+//ê³µë°± ìƒíƒœ ê²€ì¶œ í•¨ìˆ˜
 void init_queue(QueueType* q) {
 	q->front = q->rear = 0;
 }
 
-//°ø¹é »óÅÂ °ËÃâ ÇÔ¼ö(°ø¹é »óÅÂ: front==rear)
+//ê³µë°± ìƒíƒœ ê²€ì¶œ í•¨ìˆ˜(ê³µë°± ìƒíƒœ: front==rear)
 int is_empty(QueueType* q) {
 	return (q->front == q->rear);
 }
 
-//Æ÷È­ »óÅÂ °ËÃâ ÇÔ¼ö(front%M==(rear+1)%M
+//í¬í™” ìƒíƒœ ê²€ì¶œ í•¨ìˆ˜(front%M==(rear+1)%M
 int is_full(QueueType* q) {
 	return((q->rear + 1) % max_queue_size == q->front);
 }
 
-//¿øÇü Å¥ Ãâ·Â ÇÔ¼ö
+//ì›í˜• í ì¶œë ¥ í•¨ìˆ˜
 void queue_print(QueueType* q) {
 	printf("QUEUE(front=%d, rear=%d)=", q->front, q->rear);
 	if (!is_empty(q)) {
@@ -45,42 +45,44 @@ void queue_print(QueueType* q) {
 	}
 }
 
-//»ğÀÔ ÇÔ¼ö
+//ì‚½ì… í•¨ìˆ˜
 void enqueue(QueueType* q, element item) {
 	if (is_full(q))
-		error("Å¥°¡ Æ÷È­»óÅÂÀÔ´Ï´Ù.");
+		error("íê°€ í¬í™”ìƒíƒœì…ë‹ˆë‹¤.");
 	q->rear = (q->rear + 1) % max_queue_size;
 	q->data[q->rear] = item;
 }
 
-//»èÁ¦ ÇÔ¼ö
+//ì‚­ì œ í•¨ìˆ˜
 element dequeue(QueueType* q) {
 	if (is_empty(q))
-		error("Å¥°¡ °ø¹é»óÅÂÀÔ´Ï´Ù.");
+		error("íê°€ ê³µë°±ìƒíƒœì…ë‹ˆë‹¤.");
 	q->front = (q->front + 1) % max_queue_size;
 	return q->data[q->front];
 }
+
+//ì›í˜• í ì½”ë“œ ì¢…ë£Œ
 
 int main() {
 	QueueType queue;
 	int element;
 
 	init_queue(&queue);
-	printf("--µ¥ÀÌÅÍ Ãß°¡ ´Ü°è--\n");
+	printf("--ë°ì´í„° ì¶”ê°€ ë‹¨ê³„--\n");
 	while (!is_full(&queue)){
-		printf("Á¤¼ö¸¦ ÀÔ·ÂÇÏ½Ã¿À: ");
+		printf("ì •ìˆ˜ë¥¼ ì…ë ¥í•˜ì‹œì˜¤: ");
 		scanf("%d", &element);
 		enqueue(&queue, element);
 		queue_print(&queue);
 	}
-	printf("Å¥´Â Æ÷È­»óÅÂÀÔ´Ï´Ù.\n\n");
+	printf("íëŠ” í¬í™”ìƒíƒœì…ë‹ˆë‹¤.\n\n");
 
-	printf("--µ¥ÀÌÅÍ »èÁ¦ ´Ü°è--\n");
+	printf("--ë°ì´í„° ì‚­ì œ ë‹¨ê³„--\n");
 	while (!is_empty(&queue)) {
 		element = dequeue(&queue);
-		printf("²¨³»Áø Á¤¼ö: %d\n", element);
+		printf("êº¼ë‚´ì§„ ì •ìˆ˜: %d\n", element);
 		queue_print(&queue);
 	}
-	printf("Å¥´Â °ø¹é»óÅÂÀÔ´Ï´Ù.\n");
+	printf("íëŠ” ê³µë°±ìƒíƒœì…ë‹ˆë‹¤.\n");
 	return 0;
 }
