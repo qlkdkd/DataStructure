@@ -16,7 +16,7 @@
 ### 지난학기 복습
 [포인터]()
 
-[동적 할당]()
+[동적 할당](https://github.com/qlkdkd/DataStruct/tree/main/%EB%8F%99%EC%A0%81%ED%95%A0%EB%8B%B9)
 
 # 연습문제
 [2주차]()
