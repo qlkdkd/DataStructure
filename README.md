@@ -13,7 +13,10 @@
 
 [7주차](https://github.com/qlkdkd/DataStruct/tree/main/week7)
 
-[지난학기 복습: 포인터]()
+### 지난학기 복습
+[포인터]()
+
+[동적 할당]()
 
 # 연습문제
 [2주차]()
