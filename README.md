@@ -1,5 +1,5 @@
 # 강의 자료
-[1주차]()
+[1주차](https://github.com/qlkdkd/DataStruct/tree/main/week1)
 
 [2주차](https://github.com/qlkdkd/DataStruct/tree/main/week2)
 
