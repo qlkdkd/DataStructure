@@ -226,11 +226,41 @@ return largest
 ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/94ea2e91-45f1-4460-a931-9552154018e6)
 ## 복잡도 분석의 예
 * 양의 정수 n을 n번 더하는 문제를 생각하여 보자
-알고리즘 A|알고리즘 B|알고리즘 C
----|---|---
-sum<-n*n;|
-for i<-1 to n do
-  sum<-sum+n;|
-for i<-1 to n do
-  for j<- to n do
-      sum<-sum+1;
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/f4342f47-44f8-4b73-8e01-3ee267c5bf33)
+
+## 알고리즘의 비교
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/40bef0a9-3a0a-48af-9410-1cc87a305bed)
+## 연산의 횟수를 그래프로 표현
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/0bd77f83-ede3-41c3-a3db-bdadb55ddfb5)
+* 결론: 알고리즘 A가 가장 효율적
+## 빅 오 표기법
+* 일반적으로 입력의 개수와 시간 복잡도 함수의 관계는 상당히 복잡해질 수 있음
+* 자료의 개수가 많은 경우에는 차수가 가장 큰 항이 가장 영향을 크게 미치고 다른 항들은 상대적으로 무시될 수 있음.
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/62e8e461-bacb-4ba6-ad0c-47823d7f297a)
+
+* **빅 오 표기법**: 연산의 횟수를 대략적(점근적)으로 표기한 것
+* 정의: 두 개의 함수 $f(n)$과 $g(n)$이 주어졌을 때, 모든 $n>=n_0$에 대하여 $|f(n)|<=c|g(n)|$을 만족하는 두개의 상수 $c$와 $n_0$가 존재하면 $f(n)=O(g(n))$이다.
+* 빅 오는 **함수의 상한** 을 표시한다.
+    * 예: $n>=5$이면 $2n+1<10n$이므로 $2n+1=O(n)$
+ ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/f5753f89-bb72-4a63-b9b0-9fbebda99f2f)
+* $f(n)$의 값은 $n$이 매우 커지게 되면 결국은 $g(n)$보다 작거나 같게 된다. 따라서 이 정의는 $g(n)$이 $f(n)$의 상한값이라는 것을 의미한다.
+* 빅 오 표기법을 사용하면 시간복잡도 함수의 증가에 별로 기여하지 못하는 항을 생략함으로써 시간복잡도를 간단하게 표시할 수 있다.
+* 빅 오 표기법을 얻는 간단한 방법은 기본 연산의 횟수가 다항식으로 표현되었을 경우 다항식이 최고차항만을 남기고 다른 항들과 상수항을 버리는 것이다. 최고차항의 계수도 버리고 단지 최고차항의 차수만을 사용한다.
+## 빅 오 표기법의 예
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/c45c5197-8ba8-4c92-9a50-f777f59840c5)
+
+## 빅 오 표기법의 종류
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/f73aebcf-7507-447f-8a21-f4384cfaa776)
+## 빅 오 표기법
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/e767a53b-3c8a-4cd0-917d-6a5a65d709a4)
+## 빅 오 표기법 이외읭 표기법
+### 빅 오메가 표기법
+* 모든 $n>=n_0$에 대하여 $|f(n)|>=c(g(n))|$을 만족하는 2개의 상수 c와 $n_0$이 존재하면 $f(n)=\Omega(g(n))$이다.
+* 빅 오메가는 함수의 하한을 표시한다.
+* (예) $n>=5$이면 $2n+1<10n$이므로 $n=\Omega(n)$
+### 빅 세타 표기법
+* 모든 $n>=n_0$에 대하여 $c_1|g(n)|<=|f(n)|<=c_2|g(n)|$을 만족하는 3개의 상수 $c_1, c_2$와 $n_0$가 존재하면 $f(n)=\theta(g(n))$이다.
+* 빅 세타는 함수의 하한인 동시에 상한을 표시한다.
+* $(f(n)=O(g(n))) \wedge (f(n)=\Omega(g(n)))=(f(n)=\theta(n))$
+* (예) $n>=1$이면 $n<=2n+1<=3n$이므로 $2n+1=\theta(n)$
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/38ae5a28-9282-445d-8e99-01b45b1a600b)
