@@ -252,3 +252,208 @@ int main()
 ```
 ## 실행 결과
 ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/3f6ab0d7-7fc3-4655-8f7c-e1f6b20b8ab9)
+
+---
+
+# 실습
+## 실습 0. 배열 데이터 최소값,최대값 찾기
+다음과 같이 배열에 저장되어 있는 숫자들 중에서 가장 작은값과 가장 큰 값을 찾는 프로그램을 작성하시오..
+```c
+#define  N_DATA  8
+int data[N_DATA] = { 12, 23, 98, 45, 11, 92, 56, 79 };
+```
+
+코드 구현
+```c
+#include<stdio.h>
+#define n_data 8
+
+int data[n_data] = { 12, 23, 98, 45, 11, 92, 56, 79 };
+
+int find_min(int data[], int start, int n) {
+	int i, least;
+
+	least = start;
+	for (i = start + 1; i < n; i++) {
+		if (data[i] < data[least])least = i;
+	}
+	return least;
+}
+
+int main() {
+	int min_idx;
+
+	min_idx = find_min(data, 0, n_data);
+	printf("data의 최솟값: %d\n", data[min_idx]);
+	return 0;
+}
+```
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/be01e00a-b6d4-4539-8486-c911fbfe0c23)
+
+---
+
+## 실습1. 선택정렬
+선택정렬은 배열에 저장되어 있는 데이터를 오름차순이나 내림차순으로 정렬해주는 방법이다. 본 실습에서는 이러한 선택정렬 프로그램을 작성하고 수행시켜보아 이해할 수 있도록 한다.
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/5276bd1f-1d9f-4c11-870e-5cd27190c6ac)
+```c
+#include<stdio.h>
+#define n_data 8
+
+int data[n_data] = { 12, 23, 98, 45, 11, 92, 56, 79 };
+
+void print_data(int list[], int n) {
+	int i;
+	for (i = 0; i < n; i++) {
+		printf("%d ", list[i]);
+	}
+	printf("\n");
+}
+
+int find_min(int data[], int start, int n) {
+	int i, least;
+
+	least = start;
+	for (i = start + 1; i < n; i++) {
+		if (data[i] < data[least])least = i;
+	}
+	return least;
+}
+
+int main() {
+	int i, n, tmp;
+	printf("정렬 전: ");
+	print_data(data, n_data);
+
+	for (int i = 0; i < n_data; i++) {
+		n = find_min(data, i, n_data);
+
+		tmp = data[i];
+		data[i] = data[n];
+		data[n] = tmp;
+	}
+
+	printf("정렬 후: ");
+	print_data(data, n_data);
+}
+```
+
+## 버블 정렬
+```c
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <string.h>
+
+#define    N_DATA    4
+char data[N_DATA][10] = { "홍길동", "이순신", "강감찬", "유관순" };
+
+void print_data(char list[][10], int n)
+{
+    int i;
+    for (i = 0; i < n; i++) {
+        printf("%s ", list[i]);
+    }
+    printf("\n");
+}
+
+int find_min(char data[][10], int start, int n)
+{
+    int i, least;
+    least = start;
+    for (i = start + 1; i < n; i++) {
+        if (strcmp(data[i], data[least]) < 0)
+            least = i;
+    }
+    return least;
+}
+
+int main(void)
+{
+    int i, n;
+    char tmp[10];
+
+    printf("정렬 전:");
+    print_data(data, N_DATA);
+
+    for (i = 0; i < N_DATA; i++) {
+        n = find_min(data, i, N_DATA);
+        strcpy(tmp, data[i]);
+        if (i != n)   // 맥북에서는 if 문을 넣어야 동작함
+            strcpy(data[i], data[n]);
+        strcpy(data[n], tmp);
+    }
+    printf("정렬 후:");
+    print_data(data, N_DATA);
+}
+```
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/99b831ac-7437-4105-9123-c883fb3b7b47)
+
+## 문자열 정렬
+```c
+#define    N_DATA    4
+char data[N_DATA][10] = { "홍길동", "이순신", "강감찬", "유관순" };
+```
+위와 같은 문자열 배열에서 이름 순으로 선택정렬하여 출력하는 프로그램을 작성하시오.
+
+단, 문자열 비교는 strcmp() 함수를 사용함 (사용법 검색)
+     문자열 copy 는 strcpy() 함수를 사용함
+
+
+예로)
+```c
+n = strcmp("홍길동","강감찬");    // n > 0 이 됨    문자열인 경우 if(data[least] > data[i]) 이렇게 비교할 수 없음
+n = strcmp("강감찬","홍길동");    // n < 0 이 됨
+n = strcmp("강감찬","강감찬");    // n = 0 이 됨 
+```
+strcpy(data[least], data[i]);   // data[i] 에 있는 문자열이 data[least]로 copy 됨
+                                    // 문자열인 경우 data[least] = data[i] 가 동작 안함
+
+```c
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+#define	N_DATA	4
+char data[N_DATA][10] = { "홍길동", "이순신", "강감찬", "유관순" };
+
+void print_data(char list[][10], int n)
+{
+	int i;
+	for (i = 0; i < n; i++) {
+		printf("%s ", list[i]);
+	}
+	printf("\n");
+}
+
+
+int find_min(char data[][10], int start, int n)
+{
+	int i, least;
+
+	least = start;
+	for (i = start + 1; i < n; i++) {
+		if (strcmp(data[i],data[least]) < 0)
+			least = i;
+	}
+	return least;
+}
+
+int main(void)
+{
+	int i, n;
+	char tmp[10];
+
+	printf("정렬 전:");
+	print_data(data, N_DATA);
+
+	for (i = 0; i < N_DATA; i++) {
+		n = find_min(data, i, N_DATA);
+
+		strcpy(tmp, data[i]);
+		strcpy(data[i], data[n]);
+		strcpy(data[n], tmp);
+	}
+
+	printf("정렬 후:");
+	print_data(data, N_DATA);
+
+}
+```
