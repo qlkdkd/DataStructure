@@ -246,3 +246,56 @@ int main()
 	return 0;
 }
 ```
+
+---
+
+# 실습 2. 순환
+내용: 교재 2장 순환에 있는 거듭제곱의 반복과 순환버전 프로그램을 수행시켜 결과가 같은지 확인하시오.
+```c
+#include<stdio.h>
+
+double slowPower(double x, int n) {
+	int i;
+	double result = 1.0;
+	for (i = 0; i < n; i++) {
+		result *= x;
+	}
+	return result;
+}
+
+double power(double x, int n) {
+	if (n == 0) return 1;
+	else if (n % 2 == 0)return power(x * x, n / 2);
+	else return x * power(x * x, (n - 1) / 2);
+}
+
+int main() {
+	double x = 2.0;
+	int n = 10;
+
+	printf("slow power=%lf\n", slowPower(x, n));
+	printf("power=%lf\n", power(x, n));
+	return 0;
+}
+```
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/ca142b21-9824-4948-875d-f81db9a3e702)
+
+## power 다른 순환 구현
+factorial처럼 power(x, n-1)를 호출하는 방식으로 구하시오
+```c
+#include <stdio.h>
+
+int power(int x, int n)
+{
+	if (n == 1)		return x;
+	return x * power(x, n - 1);
+}
+
+int main(void)
+{
+	int result;
+	result = power(2, 10);
+	printf("2의 10승은 %d 입니다\n", result);
+}
+```
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/e0122b36-af2e-4092-936e-004d33ffb021)
