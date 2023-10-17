@@ -24,7 +24,72 @@ typedef struct student_info {
 (문자열 비교하는 함수: strcmp(str1, str2) 와 문자열 copy 함수: strcpy(dest, src) 이용)
 ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/f3288370-0d93-43ca-840a-d2f3588df0d7)
 
+```c
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
+#define	 N_STUDENTS	4
+typedef struct student_info {
+	char name[10];
+	int height;
+	float weight;
+} student_info;
+
+void swap(student_info s[], int i, int j)
+{
+	student_info tmp;
+	tmp = s[i];
+	s[i] = s[j];
+	s[j] = tmp;
+}
+
+void selection_sort_byname(student_info s[], int n) {
+	int i, j, least;
+
+	for (i = 0; i < n - 1; i++) {
+		least = i;
+		for (j = i + 1; j < n; j++) {
+			if (strcmp(s[j].name, s[least].name) < 0)
+				least = j;
+		}
+		swap(s, i, least);
+	}
+}
+
+int main(void)
+{
+	int i;
+	student_info* s;
+
+	s = (student_info*)malloc(sizeof(student_info) * N_STUDENTS);
+	if (s == (student_info*)NULL) {
+		fprintf(stderr, "malloc fail!!!\n");
+		exit(1);
+	}
+
+	for (i = 0; i < N_STUDENTS; i++) {
+		printf("이름: ");
+		scanf("%s", s[i].name);
+		printf("키: ");
+		scanf("%d", &s[i].height);
+		printf("몸무게: ");
+		scanf("%f", &s[i].weight);
+	}
+
+	selection_sort_byname(s, N_STUDENTS);
+
+	for (i = 0; i < N_STUDENTS; i++) {
+		printf("%s %d %f \n", s[i].name, s[i].height, s[i].weight);
+	}
+
+	free(s);	// 메모리 할당 해제
+
+	return 0;
+}
+
+```
  
 
 (실습 4) up/down 게임 프로그램
@@ -45,7 +110,53 @@ typedef struct student_info {
             ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/f28dcd86-4ce8-4865-96fc-28f207be342a)
 
 
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
+int main(void)
+{
+	int i, j, *user;
+	int	num_computer;
+
+	srand(time(NULL));
+	num_computer = rand() % 100 + 1;
+	user = (int *) malloc(sizeof(int)*100);
+	if(user == (int *) NULL) {
+		fprintf(stderr,"malloc fail !!! \n");
+		exit(1);
+	}
+	
+	printf("---------------------------------------\n");
+	printf("              UP/DOWN 게임             \n");
+	printf("---------------------------------------\n");
+	printf(" 1~100 사이의 숫자 하나를 선택했습니다 \n");
+	printf(" 맞춰보세요~~~ \n");
+	printf("---------------------------------------\n");
+
+	for(i=0; ;i++) {
+		printf("숫자: ");
+		scanf("%d",&user[i]);
+
+		if(user[i] > num_computer) 
+			printf("DOWN \n");
+		else if(user[i] < num_computer)
+			printf("UP \n");
+		else {
+			printf("%d번 만에 맞췄습니다.\n",i+1);
+			printf("입력숫자: ");
+			for(j=0; j<=i ; j++) {
+				printf("%d ",user[j]);
+			}
+			printf("\n");
+			break;
+		}
+	}
+	free(user); // 메모리 할당 해제
+}
+
+```
 
  
 
