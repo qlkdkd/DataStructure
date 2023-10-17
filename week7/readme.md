@@ -61,6 +61,85 @@ e. dequeue(): 배열에 3과 7이 나간다. front가 [0]번 배열로 이동한
 f. dequeue(): front가 [1]번 배열로 이동한다.
 
 [코드 보기](https://github.com/qlkdkd/DataStruct/blob/main/week7/%EC%84%A0%ED%98%95%ED%81%90/%EC%84%A0%ED%98%95%ED%81%90/FileName.c)
+```
+#include<stdio.h>
+#define MAX_QUEUE_SIZE 5
+
+typedef int element;
+typedef struct {//큐타입
+	int front;
+	int rear;
+	element data[MAX_QUEUE_SIZE];
+}QueueType;
+
+//오류 함수
+void error(char* message) {
+	fprintf(stderr, "%s\n", message);
+	exit(1);
+}
+
+void init(QueueType* q) {
+	q->rear = -1;
+	q->front = -1;
+}
+
+void queue_print(QueueType* q) {
+	for (int i = 0; i < MAX_QUEUE_SIZE; i++) {
+		if (i <= q->front || i > q->rear)
+			printf(" | ");
+		else
+			printf("%d |", q->data[i]);
+	}
+	printf("\n");
+}
+
+int is_full(QueueType* q) {
+	if (q->rear == MAX_QUEUE_SIZE - 1)
+		return 1;
+	else return 0;
+}
+
+int is_empty(QueueType* q) {
+	if (q->front == q->rear)return 1;
+	else return 0;
+}
+
+void enqueue(QueueType* q, int item) {
+	if (is_full(q)) {
+		error("큐가 포화상태입니다.");
+		return;
+	}
+	q->data[++(q->rear)] = item;
+}
+
+int dequeue(QueueType* q) {
+	if (is_empty(q)) {
+		error("큐가 공백상태입니다.");
+		return -1;
+	}
+	int item = q->data[++(q->front)];
+	return item;
+}
+
+int main() {
+	int item = 0;
+	QueueType q;
+
+	init(&q);
+
+	enqueue(&q, 10); queue_print(&q);
+	enqueue(&q, 20); queue_print(&q);
+	enqueue(&q, 30); queue_print(&q);
+
+	item = dequeue(&q); queue_print(&q);
+	item = dequeue(&q); queue_print(&q);
+	item = dequeue(&q); queue_print(&q);
+
+	return 0;
+}
+```
+
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/ded61e96-b207-4fbb-968c-29f5be1880d6)
 
 ## 선형 큐의 응용: 작업 스케줄링
 ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/bbddf2d6-1899-49d3-8f51-9a5bc6a90832)
@@ -92,6 +171,98 @@ f. dequeue(): front가 [1]번 배열로 이동한다.
     * 한 자리를 비워주지 않는다면 (c) 오류상태 처럼 되어 공백 상태와 포화 상태를 구별할 수가 없다.
 * 만약 요소들의 개수를 저장하고 있는 추가적인 변수 `count` 변수를 사용할 수 있다면 한 자리를 비워두지 않아도 된다.
 ## [원형큐 코드](https://github.com/qlkdkd/DataStruct/blob/main/week7/%EC%9B%90%ED%98%95%ED%81%90/%EC%9B%90%ED%98%95%ED%81%90/FileName.c)
+```c
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<stdlib.h>
+
+//원형큐 코드 시작
+#define max_queue_size 5
+typedef int element;
+typedef struct {//큐타입
+	element data[max_queue_size];
+	int front, rear;
+}QueueType;
+
+//오류함수
+void error(char* message) {
+	fprintf(stderr, "%s\n", message);
+	exit(1);
+}
+
+//공백 상태 검출 함수
+void init_queue(QueueType* q) {
+	q->front = q->rear = 0;
+}
+
+//공백 상태 검출 함수(공백 상태: front==rear)
+int is_empty(QueueType* q) {
+	return (q->front == q->rear);
+}
+
+//포화 상태 검출 함수(front%M==(rear+1)%M
+int is_full(QueueType* q) {
+	return((q->rear + 1) % max_queue_size == q->front);
+}
+
+//원형 큐 출력 함수
+void queue_print(QueueType* q) {
+	printf("QUEUE(front=%d, rear=%d)=", q->front, q->rear);
+	if (!is_empty(q)) {
+		int i = q->front;
+		do {
+			i = (i + 1) % (max_queue_size);
+			printf("%d| ", q->data[i]);
+			if (i == q->rear)
+				break;
+		} while (i != q->front);
+	}
+}
+
+//삽입 함수
+void enqueue(QueueType* q, element item) {
+	if (is_full(q))
+		error("큐가 포화상태입니다.");
+	q->rear = (q->rear + 1) % max_queue_size;
+	q->data[q->rear] = item;
+}
+
+//삭제 함수
+element dequeue(QueueType* q) {
+	if (is_empty(q))
+		error("큐가 공백상태입니다.");
+	q->front = (q->front + 1) % max_queue_size;
+	return q->data[q->front];
+}
+
+//원형 큐 코드 종료
+
+int main() {
+	QueueType queue;
+	int element;
+
+	init_queue(&queue);
+	printf("--데이터 추가 단계--\n");
+	while (!is_full(&queue)){
+		printf("정수를 입력하시오: ");
+		scanf("%d", &element);
+		enqueue(&queue, element);
+		queue_print(&queue);
+	}
+	printf("큐는 포화상태입니다.\n\n");
+
+	printf("--데이터 삭제 단계--\n");
+	while (!is_empty(&queue)) {
+		element = dequeue(&queue);
+		printf("꺼내진 정수: %d\n", element);
+		queue_print(&queue);
+	}
+	printf("큐는 공백상태입니다.\n");
+	return 0;
+}
+```
+
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/a2428527-a313-42ab-beae-bdfa8443e146)
 
 ## 큐의 응용: 버퍼
 ### 큐의 사용처
@@ -101,6 +272,94 @@ f. dequeue(): front가 [1]번 배열로 이동한다.
 ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/9418ceec-9da8-4353-8a00-4962fd70f44f)
 
 ## [큐 응용 프로그램](https://github.com/qlkdkd/DataStruct/blob/main/week7/%ED%81%90%20%EC%9D%91%EC%9A%A9%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8/%ED%81%90%20%EC%9D%91%EC%9A%A9%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8/FileName.c)
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+//원형큐 코드 시작
+#define max_queue_size 5
+typedef int element;
+typedef struct {//큐타입
+	element data[max_queue_size];
+	int front, rear;
+}QueueType;
+
+//오류함수
+void error(char* message) {
+	fprintf(stderr, "%s\n", message);
+	exit(1);
+}
+
+//공백 상태 검출 함수
+void init_queue(QueueType* q) {
+	q->front = q->rear = 0;
+}
+
+//공백 상태 검출 함수(공백 상태: front==rear)
+int is_empty(QueueType* q) {
+	return (q->front == q->rear);
+}
+
+//포화 상태 검출 함수(front%M==(rear+1)%M
+int is_full(QueueType* q) {
+	return((q->rear + 1) % max_queue_size == q->front);
+}
+
+//원형 큐 출력 함수
+void queue_print(QueueType* q) {
+	printf("QUEUE(front=%d, rear=%d)=", q->front, q->rear);
+	if (!is_empty(q)) {
+		int i = q->front;
+		do {
+			i = (i + 1) % (max_queue_size);
+			printf("%d| ", q->data[i]);
+			if (i == q->rear)
+				break;
+		} while (i != q->front);
+	}
+	printf("\n");
+}
+
+//삽입 함수
+void enqueue(QueueType* q, element item) {
+	if (is_full(q))
+		error("큐가 포화상태입니다.");
+	q->rear = (q->rear + 1) % max_queue_size;
+	q->data[q->rear] = item;
+}
+
+//삭제 함수
+element dequeue(QueueType* q) {
+	if (is_empty(q))
+		error("큐가 공백상태입니다.");
+	q->front = (q->front + 1) % max_queue_size;
+	return q->data[q->front];
+}
+//원형큐 코드 종료
+
+int main() {
+	QueueType queue;
+	int element;
+
+	init_queue(&queue);
+	srand(time(NULL));
+	for (int i = 0; i < 100; i++) {
+		if (rand() % 5 == 0) {//5로 나누어 떨어지면 수 추가
+			enqueue(&queue, rand() % 100);
+		}
+		queue_print(&queue);
+
+		if (rand() % 10 == 0) {//10으로 나누어 떨어지면 수 제거
+			int data = dequeue(&queue);
+		}
+		queue_print(&queue);
+	}
+
+	return 0;
+}
+```
+
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/9ebf47d0-c3b3-4616-979e-e8ef23cff550)
 
 ---
 
@@ -154,6 +413,118 @@ rear <- (rear-1+MAX_QUEUE_SIZE)%MAX_QUEUE_SIZE;
 ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/470f6526-d08c-4bf8-a43c-e4610e7f962a)
 
 ## [덱 프로그램](https://github.com/qlkdkd/DataStruct/blob/main/week7/%EB%8D%B1/%EB%8D%B1/FileName.c)
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+//덱 코드 시작
+#define max_queue_size 5
+typedef int element;
+typedef struct {//큐 타입
+	element data[max_queue_size];
+	int front, rear;
+}DequeType;
+
+//오류 함수
+void error(char* message) {
+	fprintf(stderr, "%s\n", message);
+	exit(1);
+}
+
+//초기화
+void init_deque(DequeType* q) {
+	q->front = q->rear = 0;
+}
+
+//공백 상태 검출 함수
+int is_empty(DequeType* q) {
+	return (q->front == q->rear);
+}
+
+//포화 상태 검출 함수
+int is_full(DequeType* q) {
+	return ((q->rear + 1) % max_queue_size == q->front);
+}
+
+//원형큐 출력 함수
+void deque_print(DequeType* q) {
+	printf("Deque(front=%d, rear=%d)=", q->front, q->rear);
+	if (!is_empty(q)) {
+		int i = q->front;
+		do {
+			i = (i + 1) % (max_queue_size);
+			printf("%d | ", q->data[i]);
+			if (i == q->rear)
+				break;
+		} while (i != q->front);
+	}
+	printf("\n");
+}
+
+//삽입 함수
+void add_rear(DequeType* q, element item) {
+	if (is_full(q))
+		error("큐가 포화상태입니다.");
+	q->rear=(q->rear + 1) % max_queue_size;
+	q->data[q->rear] = item;
+}
+
+//삭제 함수
+element delete_front(DequeType* q) {
+	if (is_empty(q))
+		error("큐가 공백상태입니다.");
+	q->front = (q->front + 1) % max_queue_size;
+	return q->data[q->front];
+}
+
+//삭제 함수
+element get_front(DequeType* q) {
+	if (is_empty(q))
+		error("큐가 공백상태입니다.");
+	return q->data[(q->front + 1) % max_queue_size];
+}
+
+void add_front(DequeType* q, element val) {
+	if (is_full(q))
+		error("큐가 포화상태 입니다.");
+	q->data[q->front] = val;
+	q ->front = (q->front - 1 + max_queue_size) % max_queue_size;
+}
+
+element delete_rear(DequeType* q) {
+	int prev = q->rear;
+	if (is_empty(q))
+		error("큐가 공백상태입니다.");
+	q->rear = (q->rear - 1 + max_queue_size) % max_queue_size;
+	return q->data[prev];
+}
+
+element get_rear(DequeType* q) {
+	if (is_empty(q))
+		error("큐가 공백상태입니다.");
+	return q->data[q->rear];
+}
+
+int main() {
+	DequeType queue;
+
+	init_deque(&queue);
+	for (int i = 0; i < 3; i++) {
+		add_front(&queue, i);
+		deque_print(&queue);
+	}
+	for (int i = 0; i < 3; i++) {
+		delete_rear(&queue);
+		deque_print(&queue);
+	}
+
+	return 0;
+}
+```
+
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/554bc1cd-1ba8-4021-9109-5d503baccacf)
+
+
 ## 큐의 응용: 시뮬레이션
 * 큐잉 모델은 고객에 대한 서비스를 수행하는 서버와 서비스를 받는 고객들로 이루어진다.
 * 은행에서 고객이 들어와서 서비스를 받고 나가는 과정을 시뮬레이션
@@ -169,3 +540,125 @@ rear <- (rear-1+MAX_QUEUE_SIZE)%MAX_QUEUE_SIZE;
 6. 만약 `service_time`이 0이면 현재 서비스받는 고객이 없다는 것을 의미한다. 따라서 큐에서 고객 구조체를 하나 꺼내어 서비스를 시작한다.
 
 ## [은행 시뮬레이션 프로그램](https://github.com/qlkdkd/DataStruct/blob/main/week7/%EC%9D%80%ED%96%89%20%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8/%EC%9D%80%ED%96%89%20%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8/FileName.c)
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+//원형큐 코드 시작
+#define max_queue_size 5
+typedef struct {//요소 타입
+	int id;
+	int arrival_time;
+	int service_time;
+}element;
+typedef struct {//큐타입
+	element data[max_queue_size];
+	int front, rear;
+}QueueType;
+
+
+
+//오류함수
+void error(char* message) {
+	fprintf(stderr, "%s\n", message);
+	exit(1);
+}
+
+//공백 상태 검출 함수
+void init_queue(QueueType* q) {
+	q->front = q->rear = 0;
+}
+
+//공백 상태 검출 함수(공백 상태: front==rear)
+int is_empty(QueueType* q) {
+	return (q->front == q->rear);
+}
+
+//포화 상태 검출 함수(front%M==(rear+1)%M
+int is_full(QueueType* q) {
+	return((q->rear + 1) % max_queue_size == q->front);
+}
+
+//원형 큐 출력 함수
+void queue_print(QueueType* q) {
+	printf("QUEUE(front=%d, rear=%d)=", q->front, q->rear);
+	if (!is_empty(q)) {
+		int i = q->front;
+		do {
+			i = (i + 1) % (max_queue_size);
+			printf("%d| ", q->data[i]);
+			if (i == q->rear)
+				break;
+		} while (i != q->front);
+	}
+}
+
+//삽입 함수
+void enqueue(QueueType* q, element item) {
+	if (is_full(q))
+		error("큐가 포화상태입니다.");
+	q->rear = (q->rear + 1) % max_queue_size;
+	q->data[q->rear] = item;
+}
+
+//삭제 함수
+element dequeue(QueueType* q) {
+	if (is_empty(q))
+		error("큐가 공백상태입니다.");
+	q->front = (q->front + 1) % max_queue_size;
+	return q->data[q->front];
+}
+
+//원형큐 코드 종료
+
+
+
+int main() {
+	int minutes = 60;
+	int total_wait = 0;
+	int total_customers = 0;
+	int service_time = 0;
+	int service_customer;
+	QueueType queue;
+	init_queue(&queue);
+
+	//랜덤
+	srand(time(NULL));
+
+	//고객이 들어오고 나가는 반복 루프
+	for (int clock = 0; clock < minutes; clock++) {
+		//고객 입장
+		if (rand() % 10 < 3) {
+			element customer;
+			customer.id = total_customers++;
+			customer.arrival_time = clock;
+			customer.service_time = rand() % 3 + 1;
+			enqueue(&queue, customer);
+			printf("고객%d이(가) %d분에 들어옵니다. 업무처리시간: %d분\n",
+				customer.id, customer.arrival_time, customer.service_time);
+		}
+
+		//고객 업무처리
+		if(service_time > 0) {
+			printf("고객 %d이(가) 업무처리 중입니다.\n", service_customer);
+			service_time--;
+		}
+
+		//고객 퇴장
+		else {
+			if (!is_empty(&queue)) {
+				element customer = dequeue(&queue);
+				service_customer = customer.id;
+				service_time = customer.service_time;
+				printf("고객 %d 이(가) %d분에 업무를 시작합니다. 대기사간은 %d분이였습니다.\n",
+					customer.id, clock, clock - customer.arrival_time);
+				total_wait += clock - customer.arrival_time;
+			}
+		}
+	}
+	printf("전체 대기 시간=%d분\n", total_wait);
+	return 0;
+}
+```
+
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/9e8679a8-408a-4f96-96cd-f9987b158a63)
