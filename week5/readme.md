@@ -135,16 +135,295 @@ else:
 
 ### 전역 변수로 구하는 방법
 
-[stack.c](https://github.com/qlkdkd/DataStruct/blob/main/week5/week5_stack/week5_stack/stack.c)
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+
+#define MAX_STACK_SIZE 100 //스택의 최대 크기
+typedef int element; //데이터의 자료형
+element stack[MAX_STACK_SIZE];//1차원 배열
+int top = -1;
+
+//공백 상태 검출 함수
+int is_empty() {
+	return (top == -1);
+}
+
+//포화 상태 검출 함수
+int is_full() {
+	return (top == (MAX_STACK_SIZE - 1));
+}
+
+//삽입 함수
+void push(element item){
+	if (is_full()) {
+		fprintf(stderr, "스택 포화 에러\n");
+		return;
+	}
+	else stack[++top] = item;
+}
+
+//삭제 함수
+element pop() {
+	if (is_empty()) {
+		fprintf(stderr, "스택 공백 에러\n");
+		exit(1);
+	}
+	else return stack[top--];
+}
+
+//피크 함수
+element peek() {
+	if (is_empty()) {
+		fprintf(stderr, "스택 공백 에러\n");
+		exit(1);
+	}
+	else return stack[top];
+}
+
+int main() {
+	push(1);
+	push(2);
+	push(3);
+
+	printf("%d\n", pop());
+	
+	printf("%d\n", pop());
+	printf("%d\n", pop());
+
+	return 0;
+}
+```
 
 ### 구조체 배열 사용하기
-[stack_struck.c](https://github.com/qlkdkd/DataStruct/blob/main/week5/stack_struckArray/Project1/stack_struck.c)
+```
+#include<stdio.h>
+#include<stdlib.h>
+
+#define MAX_STACK_SIZE 100
+#define MAX_STRING 100
+
+//스택에 저장되는 데이터를 구조체로 정의
+typedef struct {
+	int student_no;
+	char name[MAX_STRING];
+	char address[MAX_STRING];
+}element;
+
+element stack[MAX_STACK_SIZE];
+int top = -1;
+
+//공백 상태 검출 함수
+int is_empty() {
+	return (top == -1);
+}
+
+//포화 상태 검출 함수
+int is_full() {
+	return (top == (MAX_STACK_SIZE - 1));
+}
+
+//삽입 함수
+void push(element item) {
+	if (is_full()) {
+		fprint(stderr, "스택 포화 에러\n");
+		return;
+	}
+	else stack[++top];
+}
+
+//삭제 함수
+element pop() {
+	if (is_empty()) {
+		fprintf(stderr, "스택 공백 에러\n");
+		exit(1);
+	}
+	else return stack[top--];
+}
+
+//피크 함수
+element peek() {
+	if (is_empty()) {
+		fprintf(stderr, "스택 공백 에러\n");
+		exit(1);
+	}
+	else return stack[top];
+}
+
+int main() {
+	element ie = { 20190001, "Hong", "Seoul" };
+	element oe;
+
+	push(ie);
+	oe = pop();
+
+	printf("학번: %d\n", oe.student_no);
+	printf("이름: %s\n", oe.name);
+	printf("주소: %s\n", oe.address);
+	
+	return 0;
+}
+```
 
 ### 일반적인 배열 스택 프로그램
-[stack_array.c](https://github.com/qlkdkd/DataStruct/blob/main/week5/stack_array/stack_array/stack_array.c)
+```c
+#include <stdio.h>
+#include<stdlib.h>
 
+//차후에 스택이 필요하면 여기에 복사하여 붙인다.
+//====스택 코드 시작====
+#define MAX_STACK_SIZE 100
+
+typedef int element;
+typedef struct {
+	element data[MAX_STACK_SIZE];
+	int top;
+}StackType;
+
+
+//스택 초기화 함수
+void init_stack(StackType* s) {
+	s->top = -1;
+}
+
+
+//공백 상태 검출 함수
+int is_empty(StackType* s) {
+	return (s->top == -1);
+}
+
+
+//포화 상태 검출 함수
+int is_full(StackType* s) {
+	return (s->top == (MAX_STACK_SIZE - 1));
+}
+
+
+//삽입 함수
+void push(StackType* s, element item) {
+	if (is_full(s)) {
+		fprintf(stderr, "Stack Full Error\n");
+		return;
+	}
+	else s->data[++(s->top)] = item;
+}
+
+
+//삭제 함수
+element pop(StackType* s) {
+	if (is_empty(s)) {
+		fprintf(stderr, "Stack Empty Error\n");
+		exit(1);
+	}
+	else return s->data[(s->top)--];
+}
+
+
+//피크 함수
+element peek(StackType* s) {
+	if (is_empty(s)) {
+		fprintf(stderr, "Stack Empty Error\n");
+		exit(1);
+	}
+	else return s->data[s->top];
+}
+
+//====스택 코드의 끝====
+
+int main() {
+	StackType s;
+
+	init_stack(&s);
+	push(&s, 1);
+	push(&s, 2);
+	push(&s, 3);
+	printf("%d\n", pop(&s));
+	printf("%d\n", pop(&s));
+	printf("%d\n", pop(&s));
+
+	return 0;
+}
+```
 ### 동적 스택
-[stack_Malloc.c](https://github.com/qlkdkd/DataStruct/blob/main/week5/Stack_malloc/Stack_malloc/stackMalloc.c)
+```c
+#include <stdio.h>
+#include<stdlib.h>
+
+//차후에 스택이 필요하면 여기에 복사하여 붙인다.
+//====스택 코드 시작====
+#define MAX_STACK_SIZE 100
+
+typedef int element;
+typedef struct {
+	element data[MAX_STACK_SIZE];
+	int top;
+}StackType;
+
+
+//스택 초기화 함수
+void init_stack(StackType* s) {
+	s->top = -1;
+}
+
+
+//공백 상태 검출 함수
+int is_empty(StackType* s) {
+	return (s->top == -1);
+}
+
+
+//포화 상태 검출 함수
+int is_full(StackType* s) {
+	return (s->top == (MAX_STACK_SIZE - 1));
+}
+
+
+//삽입 함수
+void push(StackType* s, element item) {
+	if (is_full(s)) {
+		fprintf(stderr, "Stack Full Error\n");
+		return;
+	}
+	else s->data[++(s->top)] = item;
+}
+
+
+//삭제 함수
+element pop(StackType* s) {
+	if (is_empty(s)) {
+		fprintf(stderr, "Stack Empty Error\n");
+		exit(1);
+	}
+	else return s->data[(s->top)--];
+}
+
+
+//피크 함수
+element peek(StackType* s) {
+	if (is_empty(s)) {
+		fprintf(stderr, "Stack Empty Error\n");
+		exit(1);
+	}
+	else return s->data[s->top];
+}
+//====스택 코드 끝====
+
+
+int main() {
+	StackType* s;
+	s = (StackType * )malloc(sizeof(StackType));//스택을 동적으로 생성
+	init_stack(s);
+	push(s, 1);
+	push(s, 2);
+	push(s, 3);
+
+	printf("%d\n", pop(s));
+	printf("%d\n", pop(s));
+	printf("%d\n", pop(s));
+	return 0;
+}
+```
 
 ### 동적 배열 스택
 * malloc()을 호출하여 실행 시간에 메모리를 할당 받아서 스택을 생성한다.
@@ -183,8 +462,69 @@ void push(StackType *s, element item){
 }
 ``` 
 * 동적 배열 스택 프로그램
-* [stack_mallocArray.c](https://github.com/qlkdkd/DataStruct/blob/main/week5/Stack_mallocArray/Stack_mallocArray/mallocArray.c)
 
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#define MAX_STACT_SIZE 100
+
+typedef int element;
+typedef struct {
+	element* data; //data는 포인터로 정의된다.
+	int capacity; //현재 크기
+	int top;
+}StackType;
+
+//스택 생성 함수
+void init_stack(StackType* s) {
+	s->top = -1;
+	s->capacity = 1;
+	s->data = (element*)malloc(s->capacity * sizeof(element));
+}
+
+
+//공백 상태 검출 함수
+int is_empty(StackType* s) {
+	return (s->top == -1);
+}
+
+
+//포화상태 검출 함수
+int is_full(StackType* s) {
+	return (s->top == (s->capacity - 1));
+}
+
+void push(StackType* s, element item) {
+	if (is_full(s)) {
+		s->capacity *= 2;
+		s->data = (element*)realloc(s->data, s->capacity * sizeof(element));
+	}
+	s->data[++(s->top)] = item;
+}
+
+//스택 삭제 함수
+element pop(StackType* s) {
+	if (is_empty(s)) {
+		fprintf(stderr, "Stack Empty Error\n");
+		exit(1);
+	}
+	else return s->data[(s->top)--];
+}
+
+int main() {
+	StackType s;
+	init_stack(&s);
+	push(&s, 1);
+	push(&s, 2);
+	push(&s, 3);
+
+	printf("%d\n", pop(&s));
+	printf("%d\n", pop(&s));
+	printf("%d\n", pop(&s));
+
+	return 0;
+}
+```
 ---
 
 ### 스택의 응용: 괄호 검사
@@ -231,4 +571,100 @@ then(오류)
 ```
 
 ### 괄호 검사 프로그램
-[parantheseCheck.c](https://github.com/qlkdkd/DataStruct/blob/main/week5/ParenthesesCheckProgram/ParenthesesCheckProgram/ParenthesesCheck.c)
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define MAX_STACK_SIZE 100
+
+typedef int element;
+typedef struct {
+	element data[MAX_STACK_SIZE];
+	int top;
+}StackType;
+//스택 초기화 함수
+void init_stack(StackType* s) {
+	s->top = -1;
+}
+
+
+//공백 상태 검출 함수
+int is_empty(StackType* s) {
+	return (s->top == -1);
+}
+
+
+//포화 상태 검출 함수
+int is_full(StackType* s) {
+	return (s->top == (MAX_STACK_SIZE - 1));
+}
+
+
+//삽입 함수
+void push(StackType* s, element item) {
+	if (is_full(s)) {
+		fprintf(stderr, "Stack Full Error\n");
+		return;
+	}
+	else s->data[++(s->top)] = item;
+}
+
+
+//삭제 함수
+element pop(StackType* s) {
+	if (is_empty(s)) {
+		fprintf(stderr, "Stack Empty Error\n");
+		exit(1);
+	}
+	else return s->data[(s->top)--];
+}
+
+
+//피크 함수
+element peek(StackType* s) {
+	if (is_empty(s)) {
+		fprintf(stderr, "Stack Empty Error\n");
+		exit(1);
+	}
+	else return s->data[s->top];
+}
+//====스택 코드의 끝====
+
+//괄호 검사 함수
+int check_matching(const char* in) {
+	StackType s;
+	char ch, open_ch;
+	int i, n = strlen(in);//n=문자열의 길이
+	init_stack(&s);
+
+	for (i = 0; i < n; i++) {
+		ch = in[i];
+		switch (ch) {
+		case '(': case '[': case '{':
+			push(&s, ch);
+			break;
+		case ')': case ']': case '}':
+			if (is_empty(&s))return 0;
+			else {
+				open_ch = pop(&s);
+				if ((open_ch == '(' && ch != ')') ||
+					(open_ch == '[' && ch != ']') ||
+					(open_ch == '{' && ch != '}')) {
+					return 0;
+				}
+				break;
+			}
+		}
+	}
+	if (!is_empty(&s))return 0;//스택이 남아 있으면 오류
+}
+
+int main() {
+	char* p = "{A[i+1]=0; }";
+	if (check_matching(p) == 1)
+		printf("괄호 검사 성공\n");
+	else
+		printf("괄호 검사 실패\n");
+	return 0;
+}
+```
