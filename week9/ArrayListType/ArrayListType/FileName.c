@@ -68,3 +68,16 @@ void insert(ArrayListType *L, int pos, element item){
 		L->size++;
 	}
 }
+
+
+//항목 삭제 연산
+element delete(ArrayListType *L, int pos){
+	element item;
+	if(pos<0 || pos>=L->size)
+		error("위치 오류");
+	item=L->array[pos];
+	for(int i=pos; i<(L->size-1); i++)
+		L->array[i]=L->array[i+1];
+	L->size--;
+	return item;
+}
