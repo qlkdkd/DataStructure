@@ -1,20 +1,21 @@
 # 포인터
 ### 포인터란?
-* 포인터(pointer): 주소를 가지고 있는 변수
+* 포인터(pointer): 주소를 가지고 있는 변수. 포인터는 변수가 저장되는 주소와 깊은 관계 있음
 
 ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/4ac61cc3-bb07-450a-924b-9a6b75f135a0)
 
 
 ### 메모리의 구조
 * 변수는 메모리에 저장된다.
-* 메모리는 바이트 단위로 엑세스된다.
-* 첫번째 바이트의 주소는 0, 두번째 바이트는 1...
+* 메모리는 바이트 단위로 엑세스되고 각 바이트마다 고유한 주소를 가지고 있다.
+* 컴퓨터가 20바이트 크기의 메모리를 가지고 있다면, 첫번째 바이트의 주소는 0, 두번째 바이트는 1, ..., 마지막 바이트는 19
 
 ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/8c327d08-bc90-40bf-a086-12478f23dbb9)
 
 ### 변수와 메모리
+* 프로그램에서 변수를 만들면 이들 변수는 컴파일러에 의하여 메모리 공간에 배치됨.
 * 변수의 크기에 따라서 차지하는 메모리 공간이 달라진다.
-* `char`형 변수: `1`바이트, `int`형 변수: `4`바이트,...
+* `char`형 변수: `1`바이트, `int`, `float`형 변수: `4`바이트,...
 
 ```c
 int main(){
@@ -24,64 +25,119 @@ int main(){
   return 0;
 }
 ```
+* 위와 같이 변수들을 생성하면 메모리상에는 다음과 같이 변수들이 배치될 수 있음
 ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/e3d801ef-ffaf-4ac8-8540-b157c1dd6a54)
 
 ### 변수의 주소
 * 변수의 주소를 계산하는 연산자: `&`
-* 변수 i의 주소: &i
-
+* 주소 연산자 &는 변수의 이름을 받아서 변수의 주소를 반환함.
+* 예를 들어 int i;라고 변수를 정의했으면 변수 i의 주소는 &i하면 알 수 있
+* 주소를 출력하는 형식 지정자는 "%p"로서 16진수로 주소를 출력한다.
   ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/f3e41be2-e699-4216-8e1c-bfbb6ca5e3f9)
 [코드 보기](https://github.com/qlkdkd/DataStruct/blob/main/%ED%8F%AC%EC%9D%B8%ED%84%B0/%EB%B3%80%EC%88%98%EC%9D%98%20%EC%A3%BC%EC%86%8C/%EB%B3%80%EC%88%98%EC%9D%98%20%EC%A3%BC%EC%86%8C/FileName.c)
+```c
+#include<stdio.h>
+
+int main() {
+	int i = 10;
+	char c = 69;
+	float f = 12.3;
+
+	printf("i의 주소: %p\n", &i);
+	printf("c의 주소: %p\n", &c);
+	printf("f의 주소: %p\n", &f);
+	return 0;
+}
+```
 
 ---
 
 ### 포인터의 선언
 * 포인터: 변수의 주소를 가지고 있는 변수
+* 포인터가 저장하고 있는것은 값이 아니라 변수의 주소이다.
+* 정수를 가리키는 포인터: int *p;
+
+* p는 정수를 가리키는 포인터임. 포인터도 변수
+* 포인터도 사용하기 전에 선언되어야 함.
+* 포인터를 선언하려면 포인터가 가리키는 자료형을 쓰고 *를 붙인 다음, 변수의 이름을 쓴다.
+
   ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/120fef2a-ce6c-46a3-a90c-d283a1d9a707)
 
 ### 포인터와 변수의 연결
+
+* 포인터는 사용하기 전에 반드시 초기화하여야 한다. 포인터에는 변수의 주소가 저장되어야 하므로 &연산자를 이용하여 변수의 주소를 계산하여 포인터에 대입하여 주면 된다.
 ```c
 int number=10; //정수형 변수 number 선언
 int *p; //포인터 변수 p 선언
-p=&number; //변수 number 의 주소가 포인터 p로 대
+p=&number; //변수 number 의 주소가 포인터 p로 대입
 ```
+* p: 포인터
+* 변수 number의 주소를 4라고 가정하고 p=&number의 연산을 실행하면 변수 number의 주소인 4가 p에 저장된다. 이와 같은 상황을 보통 "포인터 p가 변수 number을 가리킨다." 라고 표현한다
+* 보통 p에서 number를 가리키는 화살표로 나타낸다
+* 포인터는 지정된 자료형의 변수만을 가리킬 수 있다.
+
 ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/815b9900-941a-43ea-b988-38d003e389cf)
 
 * 포인터 p가 변수 number를 가리킨다.
+
 ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/13e0693a-648a-4164-b0b7-f30a555ba320)
 
 ### 간접 참조 연산자
+* 포인터 p가 가리키는 위치에 저장된 내용을 가져오려면 p 앞에 *기호를 붙여서 *p하면 된다. 이것을 포인를 통하여 간접 참조(dereferencing, indirection)한다.
 * 간접 참조 연산자 *: 포인터가 가리키는 값을 가져오는 연산자
+* *는 단항 면산자로서 포인터가 가리키는 위치의 내용을 추출하는 간접 참조 연산자이다.
+* *는 단항 연산자로서 괄호 다음으로 높은 우선 순위를 가진다.
+
 ```c
 int i=10;
-int *p;
-p=&i;
-printf("%d", &p);
+int *p;//p 간접 참조
+p=&i;//p에 i의 주소 저장
+printf("%d", *p);//p에 저장된 i의 주소를 참조하여 i에 저장된 값 출력
 ```
 
 ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/569ff796-a155-47f3-8130-8463f34f4a4e)
 
 ### 포인터 연산자
 * 포인터에 관련된 연산자는 다음과 같은 2가지이다.
-    #### 주소 연산자(&)
-    #### 간접 참조 연산자(*)
-* 예제1[example1.c](https://github.com/qlkdkd/DataStruct/blob/main/%ED%8F%AC%EC%9D%B8%ED%84%B0/example1/example1/FileName.c)
-> 결과
-> 
-> 변수 number의 주소: 261093460
->
-> 포인터의 값: 261093460
->
-> 변수 number의 값: 10
->
-> 포인터가 가리키는 값: 10
+    #### 주소 연산자: &
+    #### 간접 참조 연산자: *
 
-* 예제2[example2.c](https://github.com/qlkdkd/DataStruct/blob/main/%ED%8F%AC%EC%9D%B8%ED%84%B0/example2/example2/FileName.c)
-> 결과
->
-> 변수 number의 값: 10
->
-> 변수 number의 값: 20
+## 예제 1
+```c
+#include<stdio.h>
+int main() {
+	int number = 10;
+	int* p;
+	p = &number;
+
+	printf("변수 number의 주소: %u\n", &number);
+	printf("포인터의 값: %u\n", p);
+	printf("변수 number의 값: %d\n", number);
+	printf("포인터가 가리키는 값: %d\n", *p);
+
+	return 0;
+}
+```
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/2b8eeac1-b532-437e-9ebe-4686d632deb5)
+
+## 예제 2
+```c
+#include<stdio.h>
+
+int main() {
+	int number = 10;
+	int* p;
+
+	p = &number;
+	printf("변수 number의 값: %d\n", number);
+
+	*p = 20;
+	printf("변수 number의 값: %d\n", number);
+	
+	return 0;
+}
+```
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/886b3043-e8f1-4b8c-9d82-537b59901519)
 
 ---
 
