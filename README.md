@@ -16,7 +16,7 @@
 [9주차](https://github.com/qlkdkd/DataStruct/tree/main/week9)
 
 ### 지난학기 복습
-[포인터]()
+[포인터](https://github.com/qlkdkd/DataStruct/tree/main/%ED%8F%AC%EC%9D%B8%ED%84%B0)
 
 [동적 할당](https://github.com/qlkdkd/DataStruct/tree/main/%EB%8F%99%EC%A0%81%ED%95%A0%EB%8B%B9)
 
