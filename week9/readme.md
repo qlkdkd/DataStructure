@@ -60,7 +60,7 @@ typedef struct{
 }ArrayListType;
 ```
 
-* 리스트 연산 구현
+* [리스트 연산 구현](https://github.com/qlkdkd/DataStruct/blob/main/week9/ArrayListType/ArrayListType/FileName.c)
 ```c
 #define MAX_LIST_SIZE 100
 #include<stdio.h>
@@ -112,5 +112,57 @@ void print_list(ArrayListType* L) {
 		printf("%d->", L->array[i]);
 	}
 	printf("\n");
+}
+
+
+//맨 끝에 항목 추가
+void insert_last(ArrayListType *L, element item){
+	if(L->size>=MAX_LIST_SIZE){
+		error("리스트 오버플로우");
+	}
+	L->array[L->size++]=item;
+}
+```
+
+### 항목 추가 연산
+
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/9815d7b0-e16d-4ab3-9720-8b00058ab317)
+
+* insert_last() 함수에서는 리스트에 빈 공간이 없으면 오류를 발생시킴
+* 리스트의 pos위치에 새로운 항목을 추가하려면 pos번째부터 마지막 항목까지 한 칸씩 오른쪽으로 이동하여 빈 자리를 만든 후에, 새로운 항목을 pos위치에 저장하여야 함
+
+* 위 그림은 pos=1에 새로운 항목을 추가하는 것을 나타낸다.
+* 빈자리를 만들기 위하여 array[1]부터 array[3]까지 한 칸씩 오른쪽으로 이동함
+* 순서 중요!
+* array[3]->array[4], array[2]->array[3], array[1]->array[2]
+* 새로운 항목을 array[1]에 저장
+
+* insert 함수 구현
+```c
+//pos위치에 항목 추가
+void insert(ArrayListType *L, int pos, element item){
+	if(!is_full(L) && (pos>=0) && (pos<=L->size)){
+		for(int i=(L->size-1); i>=pos; i--)
+			L->array[i+1]=L->array[i];
+		L->array[pos]=item;
+		L->size++;
+	}
+}
+```
+
+### 항목 삭제 연산
+* 마찬가지로 삭제한 후에 array[pos+1]부터 array[size-1]까지 한 칸씩을 앞으로 이동해야 함
+
+```c
+//항목 삭제 연산
+element delete(ArrayListType *L, int pos){
+	element item;
+	if(pos<0 || pos>=L->size)
+		error("위치 오류");
+	item=L->array[pos];
+	for(int i=pos; i<(L->size-1); i++)
+		L->array[i]=L->array[i+1];
+	L->size--;
+	return item;
 }
 ```
