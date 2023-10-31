@@ -37,6 +37,7 @@ ListNode *insert_first(ListNode *head, int value){
 4. head를 p값으로 변경한다.
 5. 변경된 헤드 포인터 반환
 
+---
 
 ## 삽입 연산(insert())
 insert()는 가장 일반적인 경우로서 연결 리스트의 중간에 새로운 노드를 추가한다. 이때는 반드시 삽입되는 위치의 선행 노드를 알아야 삽입이 가능한다.
@@ -62,6 +63,8 @@ ListNode *insert(ListNode *head, ListNode *pre, element value){
 4. 10의 링크 필드가 20을 가리키도록 한다.
 5. 변경된 헤드포인터 반환
 
+---
+
 ## 단순 연결 리스트_삭제연산(delete_first())
 첫 번째 노드를 삭제하는 함수 delete_first는 다음과 같은 원형을 가진다.
 ```c
@@ -76,7 +79,7 @@ ListNode *delete_first(ListNode *head){
     ListNode *removed;
     if(head==NULL) return NULL;
     removed=head;//(1)
-    head-removed->link;//(2)
+    head=removed->link;//(2)
     free(removed);//(3)
     return head;//(4)
 }
@@ -88,6 +91,7 @@ ListNode *delete_first(ListNode *head){
 3. removed가 가리키는 동적 메모리를 반환한다.
 4. 변경된 헤드포인터를 반환한다.
 
+---
 
 ## 삭제 연산(delete())
 ![image](https://github.com/qlkdkd/DataStruct/assets/71871927/04e0ee24-932a-46c0-a5c8-29f353819d68)
@@ -107,6 +111,225 @@ ListNode *delete(ListNode *head, ListNode *pre){
 3. 삭제할 노드의 동적 메모리를 반납한다.
 4. 변경된 헤드포인터를 반환한다.
 
+---
 
 ## 방문 연산 코드(print_list())
-우리는 연결 리스트의 노드를 방문하면서 노드를 대상으로 다양한 작업을 할 수 있다. 예를 들면 노드를 방문하면서 노드의 데이터를 화면에 출력할 수 있다.
+우리는 연결 리스트의 노드를 방문하면서 노드를 대상으로 다양한 작업을 할 수 있다. 예를 들면 노드를 방문하면서 노드의 데이터를 화면에 출력할 수 있다. 연결 리스트 안의 모든 노드 데이터를 출력하는 함수 print_list를 작성해보자.
+노드의 링크 값이 NULL이 아니면 계속 링크를 따라 가면서 노드를 방문한다. 링크값이 NULL이면 연결 리스트의 끝에 도달한 것이므로 반복을 중단한다. 방문 연산 연결 리스트에서 가장 기본이 되는 연산이므로 그 개념을 확시히 이해해야 한다.
+
+```c
+void print_list(ListNode *head){
+    for(ListNode *p=head; p!=NULL; p=p->Link)
+        printf("%d->", p->data);
+    printf("NULL\n");
+}
+```
+
+---
+
+## [테스트 프로그램](https://github.com/qlkdkd/DataStruct/blob/main/week10/ListTest/ListTest/FileName.c)
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef int element;
+typedef struct ListNode {//노드 타입
+	element data;
+	struct ListNode* link;
+}ListNode;
+
+//오류 처리 함수
+void error(char* message) {
+	fprintf(stderr, "%s\n", message);
+	exit(1);
+}
+
+//첫 노드 삽입 연산
+ListNode* insert_first(ListNode* head, int value) {
+    ListNode* p = (ListNode*)malloc(sizeof(ListNode));//(1)
+    p->data = value;//
+    p->link = head;//(3)
+    head = p;//(4)
+    return head;//(5)
+}
+
+//노드 pre뒤에 새로운 노드 삽입
+ListNode* insert(ListNode* head, ListNode* pre, element value) {
+    ListNode* p = (ListNode*)malloc(sizeof(ListNode));//(1)
+    p->data = value;//(2)
+    p->link = pre->link;//(3)
+    p->link = p;//(4)
+    return head;//(5)
+}
+
+//첫 노드 삭제
+ListNode* delete_first(ListNode* head) {
+    ListNode* removed;
+    if (head == NULL) return NULL;
+    removed = head;//(1)
+    head = removed->link;//(2)
+    free(removed);//(3)
+    return head;//(4)
+}
+
+//pre가 가리키는 노드의 다음 노드 삭제
+ListNode* delete(ListNode* head, ListNode* pre) {
+    ListNode* removed;
+    removed = pre->link;//(1)
+    pre->link = removed->link;//(2)
+    free(removed);//(3)
+    return head;//(4)
+}
+
+//연결 리스트 출력
+void print_list(ListNode* head) {
+    for (ListNode* p = head; p != NULL; p = p->link)
+        printf("%d->", p->data);
+    printf("NULL\n");
+}
+
+
+
+//테스트 프로그램
+int main() {
+    ListNode* head = NULL;
+    
+    for (int i = 0; i < 5; i++) {
+        head = insert_first(head, i);//insert_first()가 반환된 헤드 포인터를 head에 대입
+        print_list(head);
+    }
+    for (int i = 0; i < 5; i++) {
+        head = delete_first(head);
+        print_list(head);
+    }
+
+    return 0;
+}
+```
+
+---
+
+## Lab: 단어들을 저장하고 있는 연결 리스트
+
+```c
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+typedef struct {
+	char name[100];
+}element;
+
+typedef struct ListNode {
+	element data;
+	struct ListNode* link;
+}ListNode;
+
+//오류 처리 함수
+void error(char* message) {
+	fprintf(stderr, "%s\n", message);
+	exit(1);
+}
+
+//첫 노드 삽입 연산
+ListNode* insert_first(ListNode* head, element value) {
+	ListNode* p = (ListNode*)malloc(sizeof(ListNode));//(1)
+	p->data = value;//
+	p->link = head;//(3)
+	head = p;//(4)
+	return head;//(5)
+}
+
+//연결 리스트 출력
+void print_list(ListNode* head) {
+	for (ListNode* p = head; p != NULL; p = p->link)
+		printf("%s->", p->data);//단어를 출력하므로 %d에서 %s로 바꿔줌
+	printf("NULL\n");
+}
+
+int main() {
+	ListNode* head = NULL;
+	element data;
+
+	strcpy(data.name, "APPLE");
+	head = insert_first(head, data);
+	print_list(head);
+
+	strcpy(data.name, "KIWI");
+	head = insert_first(head, data);
+	print_list(head);
+
+	strcpy(data.name, "BANANA");
+	head = insert_first(head, data);
+	print_list(head);
+
+	return 0;
+}
+```
+![image](https://github.com/qlkdkd/DataStruct/assets/71871927/09ae9650-8b8d-4079-9fe2-e561232fe8de)
+
+---
+
+## Lab: 특정한 값을 탐색하는 함수 작성
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef int element;
+typedef struct ListNode {//노드 타입
+    element data;
+    struct ListNode* link;
+}ListNode;
+
+
+//첫 노드 삽입 연산
+ListNode* insert_first(ListNode* head, element value) {
+    ListNode* p = (ListNode*)malloc(sizeof(ListNode));//(1)
+    p->data = value;//
+    p->link = head;//(3)
+    head = p;//(4)
+    return head;//(5)
+}
+//연결 리스트 출력
+void print_list(ListNode* head) {
+    for (ListNode* p = head; p != NULL; p = p->link)
+        printf("%d->", p->data);
+    printf("NULL\n");
+}
+
+//탐색 함수
+ListNode* search_list(ListNode* head, element x) {
+    ListNode* p = head;
+
+    while (p != NULL) {
+        if (p->data == x)return p;
+        p = p->link;
+    }
+    return NULL;//탐색 실패
+}
+
+
+//테스트 프로그램
+int main() {
+    ListNode* head = NULL;
+
+    head = insert_first(head, 10);
+    print_list(head);
+
+    head = insert_first(head, 20);
+    print_list(head);
+
+    head = insert_first(head, 30);
+    print_list(head);
+
+    if (search_list(head, 30) != NULL)
+        printf("리스트에서 30을 찾았습니다.\n");
+    else
+        printf("리스트에서 30을 찾지 못했습니다.\n");
+    
+    return 0;
+}
+```
