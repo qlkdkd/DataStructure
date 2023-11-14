@@ -210,7 +210,7 @@ int main() {
 
 ---
 
-## Lab: 단어들을 저장하고 있는 연결 리스트
+## [Lab: 단어들을 저장하고 있는 연결 리스트](https://github.com/qlkdkd/DataStructure/blob/main/week10/wordList/wordList/FileName.c)
 
 ```c
 #define _CRT_SECURE_NO_WARNINGS
@@ -272,7 +272,7 @@ int main() {
 
 ---
 
-## Lab: 특정한 값을 탐색하는 함수 작성
+## [Lab: 특정한 값을 탐색하는 함수 작성](https://github.com/qlkdkd/DataStructure/blob/main/week10/fineSpecificValue/fineSpecificValue/FileName.c)
 
 ```c
 #include<stdio.h>
@@ -336,7 +336,7 @@ int main() {
 
 ---
 
-## Lab: 2개의 리스트를 합하는 함수
+## [Lab: 2개의 리스트를 합하는 함수](https://github.com/qlkdkd/DataStructure/blob/main/week10/TwoList/TwoList/FileName.c)
 2개의리스트를 합치려면 먼저 첫 번째 리스트를 맨 끝으로 간 다음, 마지막 노드의 링크가 두 번째 리스트의 첫 번째 노드를 가리키도록 변경하면 된다. 주의할 점은 list1이나 list2가 NULL인 경우를 반드시 처리해주어야 한다.
 ![image](https://github.com/qlkdkd/DataStructure/assets/71871927/b780afa4-599e-4be3-8ede-ee300707e2a3)
 
@@ -439,7 +439,7 @@ int main() {
 
 ---
 
-## Lab: 리스트를 역순으로 만드는 연산
+## [Lab: 리스트를 역순으로 만드는 연산](https://github.com/qlkdkd/DataStructure/blob/main/week10/ReverceList/ReverceList/FileName.c)
 * 리스트를 역순으로 만드는 함수에서는 3개의 포인터 p, q, r 포인터를 사용하여 연결 리스트를 순회하면서 링크의 방향을 역순으로 바꾸면 된다.
 * p는 역순으로 만들 리스트이고, q는 현재 역순으로 만들 노드를 가리키며, r은 이미 역순으로 변경된 리스트를 가리킨다. r은 q, q는 p를 차례로 따른다.
 * 주의할 점은 링크의 방향을 역순으로 바꾸기 전에 미리 뒤의 노드를 알아놓아야 한다.
@@ -543,7 +543,7 @@ int main() {
 
 ---
 
-## 연결 리스틑트의 응용: 다항식
+## [연결 리스트의 응용: 다항식](https://github.com/qlkdkd/DataStructure/blob/main/week10/PolynomialProgram/PolynomialProgram/FileName.c)
 * 다항식을 단순 연결 리스트로 표현 가능한데, 각 항을 하나의 노드로 표현하면 다음과 같다.
 	* 계수: coef
  	* 지수: expon
