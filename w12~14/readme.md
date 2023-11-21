@@ -48,7 +48,7 @@
 * 위의 트리의 높이는 4이다.
 
 ## 트리의 종류
-![image](https://github.com/qlkdkd/DataStructure/assets/71871927/3c6591f5-3010-4610-84c7-d372aa25c8f5)
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/3c6591f5-3010-4610-84c7-d372aa25c8f5){: width="400" height="400"}
 
 * 일반 트리: 트리를 프로그램 안에서 표현하는 가장 일반적인 방법. 각 노드가 데이터를 저장하는 데이터 필드와 자식 노드를 가리키는 링크 필드를 가지게 하는 것
     * 일반 트리에서 n은 자식 노드의 개수, 즉 노드의 차수
