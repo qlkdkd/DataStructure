@@ -456,3 +456,180 @@ int main() {
 ```
 
 ![image](https://github.com/qlkdkd/DataStructure/assets/71871927/69100b69-db34-427f-8bb3-c0bdaf5f86c1)
+
+---
+
+# lab: 특정한 값을 탐색하는 함수
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef int element;
+typedef struct ListNode {
+	element data;
+	struct ListNode* link;
+}ListNode;
+
+ListNode* insert_first(ListNode* head, element value) {
+	ListNode* p = (ListNode*)malloc(sizeof(ListNode));
+	p->data = value;
+	p->link = head;
+	head = p;
+	return head;
+}
+
+void print_list(ListNode* head) {
+	for (ListNode* p = head; p != NULL; p = p->link)
+		printf("%d-> ", p->data);
+	printf("NULL\n");
+}
+
+ListNode* search_list(ListNode* head, element x) {
+	ListNode* p = head;
+
+	while (p != NULL) {
+		if (p->data == x)return p;
+		p = p->link;
+	}
+	return NULL;
+}
+
+int main() {
+	ListNode* head = NULL;
+
+	head = insert_first(head, 10);
+	print_list(head);
+	head = insert_first(head, 20);
+	print_list(head);
+	head = insert_first(head, 30);
+	print_list(head);
+
+	if (secrch_list(head, 30) != NULL)
+		printf("리스트에서 30을 찾았습니다.\n");
+	else printf("리스트에서 30을 찾지 못했습니다.\n");
+
+	return 0;
+}
+```
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/3bafea17-4870-41ad-8fc2-2fdeecac9c0e)
+
+---
+
+# Lab: 2개의 리스트를 합하는 함수
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef int element;
+typedef struct ListNode {
+	element data;
+	struct ListNode* link;
+}ListNode;
+
+ListNode* insert_first(ListNode* head, element value) {
+	ListNode* p = (ListNode*)malloc(sizeof(ListNode));
+	p->data = value;
+	p->link = head;
+	head = p;
+	return head;
+}
+
+void print_list(ListNode* head) {
+	for (ListNode* p = head; p != NULL; p = p->link)
+		printf("%d-> ", p->data);
+	printf("NULL\n");
+}
+
+ListNode* contact_list(ListNode* head1, ListNode* head2) {
+	if (head1 == NULL)return head2;
+	else if (head2 == NULL) return head1;
+	else {
+		ListNode* p;
+		p = head1;
+		while (p->link != NULL)
+			p = p->link;
+		p->link = head2;
+		return head1;
+	}
+}
+
+int main() {
+	ListNode* head1 = NULL;
+	ListNode* head2 = NULL;
+
+	head1 = insert_first(head1, 10);
+	head1 = insert_first(head1, 20);
+	head1 = insert_first(head1, 30);
+	print_list(head1);
+
+	head2 = insert_first(head2, 40);
+	head2 = insert_first(head2, 50);
+	print_list(head2);
+
+	ListNode* total = contact_list(head1, head2);
+	print_list(total);
+	return 0;
+}
+```
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/4be38830-be84-412e-9543-f4ca41444258)
+
+---
+
+# Lab: 리스트를 역순으로 만드는 함수
+* 3개의 포인터 p, q, r 포인터를 사용하여 연결 리스트를 순회하면서 링크의 방향을 역순으로 바꾸면 됨
+* 주의할 점: 링크의 방향을 역순으로 만들기 전에 미리 뒤의 노드를 알아놓아야 함
+* p: 역순으로 만들 리스트, q: 현재 역순으로 만들 노드를 가리, r: 이미 역순으로 변경된 리스트 기리킴
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef int element;
+typedef struct ListNode {
+	element data;
+	struct ListNode* link;
+}ListNode;
+
+ListNode *insert_first(ListNode* head, element value) {
+	ListNode* p = (ListNode*)malloc(sizeof(ListNode));
+	p->data = value;
+	p->link = head;
+	head = p;
+	return head;
+}
+
+void print_list(ListNode* head) {
+	for (ListNode* p=head; p != NULL; p = p->link) 
+		printf("%d-> ", p->data);
+	printf("NULL\n");
+}
+
+ListNode * reverse(ListNode* head) {
+	ListNode* p, * q, * r;
+
+	p = head;
+	q = NULL;
+	while (p != NULL) {
+		r = q;
+		q = p;
+		p = p->link;
+		q->link = r;
+	}
+	return q;
+}
+
+int main() {
+	ListNode* head1 = NULL;
+	ListNode* head2 = NULL;
+
+	head1 = insert_first(head1, 10);
+	head1 = insert_first(head1, 20);
+	head1 = insert_first(head1, 30);
+	print_list(head1);
+
+	head2 = reverse(head1);
+	print_list(head2);
+
+	return 0;
+}
+```
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/7dcb71d1-4593-4128-bb46-8368f91fa5ee)
