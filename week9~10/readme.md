@@ -310,4 +310,149 @@ ListNode* insert_first(ListNode* head, int value) {
 ![image](https://github.com/qlkdkd/DataStructure/assets/71871927/0f493a3a-071a-4e96-ba99-1aa2e494a858)
 1. 동적 메모리 할당을 통하여 새로운 노드 p 생성
 2. p->data에 value를 저장
-3. p->link를 현재의 head
+3. p->link를 현재의 head값으로 변경한다.
+4. head를 p값으로 변경
+5. 변경된 헤드포인터 반환
+
+### insert(): 리스트의 중간 부분에 항목을 삽입하는 함수
+```c
+ListNode* insert(ListNode* head, ListNode* pre, element value) {
+	ListNode* p = (ListNode*)malloc(sizeof(ListNode));//(1)
+	p->data = value;//(2)
+	p->link = pre->link;//(3)
+	pre->link = p;//(4)
+	return head;//(5)
+}
+```
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/1107185f-715c-4f5e-b43d-5189243b0b77)
+1. 새로운 노드를 생성하여 변수 p에 저장
+2. p의 데이터 필드에 value 저장
+3. p의 링크필드가 노드 pre를 가리키도록 변경
+4. pre의 링크필드가 p를 가리키도록 하기
+5. 변경된 헤드포인터 저장
+
+## 삭제 연산
+### delete_first(): 리스트의 첫 번째 항목을 삭제하는 함수
+```c
+ListNode* delete_first(ListNode* head) {
+	ListNode* removed;
+	if (head == NULL) return NULL;
+	removed = head;//1
+	head = removed->link;//2
+	free(removed);//3
+	return head;//4
+}
+```
+
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/ed3a1a77-88e1-4f03-b455-ddeaa17abfff)
+
+1. 헤드 포인터의 값을 removed에 복사
+2. 헤드 포인터의 값을 head->link로 변경
+3. removed가 가리키는 동적 메모리를 반환
+4. 변경된 헤드포인터를 반환
+### delete():  리스트의 중간 부분의 항목을 삭제하는 함수
+```c
+ListNode* delete(ListNode* head, ListNode* pre) {
+	ListNode* removed;
+	removed = pre->link;
+	pre->link = removed->link;//2
+	free(removed);//3
+	return head;//4
+}
+```
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/5d7f6341-c07f-4d3d-a26d-d8183a2b49c1)
+1. 삭제할 노드 찾기
+2. 헤드노드의 링크 필드가 pre노드를 가리키게 하기
+3. 삭제할 노드의 동적 메모리 반납
+4. 변경된 헤드포인터 반환
+
+## print_list()리스트를 출력하는 함수
+* 노드의 링크값이 NULL이 아니면 계속 링크를 따라 가면서 노드를 방문함
+```c
+void print_list(ListNode* head) {
+	for (ListNode* p = head; p != NULL; p = p->link)
+		printf("%d-> ", p->data);
+	printf("NULL\n");
+}
+
+```
+
+## [테스트 프로그램]()
+```c
+int main() {
+	ListNode* head = NULL;
+	for (int i = 0; i < 5; i++) {
+		head = insert_first(head, i);
+		print_list(head);
+	}
+	for (int i = 0; i < 5; i++) {
+		head = delete_first(head);
+		print_list(head);
+	}
+	return 0;
+}
+```
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/77e16b2c-b388-4942-8171-42d353fce1e0)
+
+---
+
+# Lab: 단어들을 저장하고 있는 연결 리스트
+```c
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<stdlib.h>
+
+//이번에는 element 를 배열을 포함하고 있는 구조체로 정의
+typedef struct {
+	char name[100];
+}element;
+
+typedef struct ListNode {
+	element data;
+	struct ListNode* link;
+}ListNode;
+
+//오류처리 함수
+void error(char* message) {
+	fprintf(stderr, "%s\n", message);
+	exit(1);
+}
+
+//삽입
+ListNode* insert_first(ListNode* head, element value) {
+	ListNode* p = (ListNode*)malloc(sizeof(ListNode));
+	p->data = value;
+	p->link = head;
+	head = p;
+	return head;
+}
+
+//출력
+void print_list(ListNode* head) {
+	for (ListNode* p = head; p != NULL; p = p->link) {
+		printf("%s-> ", p->data.name);
+	}
+	printf("NULL\n");
+}
+
+int main() {
+	ListNode* head = NULL;
+	element data;
+
+	strcpy(data.name, "apple");
+	head = insert_first(head, data);
+	print_list(head);
+
+	strcpy(data.name, "kiwi");
+	head = insert_first(head, data);
+	print_list(head);
+
+	strcpy(data.name, "banana");
+	head = insert_first(head, data);
+	print_list(head);
+
+	return 0;
+}
+```
+
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/69100b69-db34-427f-8bb3-c0bdaf5f86c1)
