@@ -633,3 +633,161 @@ int main() {
 }
 ```
 ![image](https://github.com/qlkdkd/DataStructure/assets/71871927/7dcb71d1-4593-4128-bb46-8368f91fa5ee)
+
+---
+
+# 연결 리스트의 응용: 다항식의 덧셈 구현
+* 다항식의 구조
+$$A(x)=a_{m-1}x^{e_{m+1}}+...+a_0x^{e_0}$$
+* 하나의 다항식을 하나의 연결 리스트로 표현
+$$A=3x^{12}+2x^8+1$$
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/4ba98550-b4d1-4adc-8f21-0f43e2018eb4)
+
+## 다항식의 구조체 표현
+```c
+typedef struct ListNode {
+	int coef;
+	int expon;
+	struct ListNode* link;
+}ListNode;
+```
+* 노드의 구성
+	* 계수:  coef
+	* 지수: expon
+	* 항을 가리키는 링크: link
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/e65f5496-70de-4c1d-be5c-f618ce09f103)
+
+## 다항식의 덧셈 구현
+* C(x)=A(x)+B(x)를 구현
+	* $A(x)=3x^{12}+2x^8+1$
+	* $B(x)=8x^{12}-3x^{10}+10x^6$
+	* $C(x)=11x^{12}-3x^{10}+2x^8+10x^6+1$
+
+## 다항식의 덧셈 과정
+1. p.expon==q.expon: 두 계수를 더해서 0이 아니면 새로운 항을 만들어 결과 다항식 C에 추가한다. 그리고 p와 q를 모두 다음 항으로 이동
+2. p.expon<q.expon: q가 지시하는 항을 새로운 항으로 복사하여 결과 다항식 C에 추가한다. 그리고 q만 다음 항으로 이동한다.
+3. p.expon>q.expon: p가 지시하는 항을 새로운 항으로 복사하여 결과 다항식 c에 추가한다. 그리고 p만 다음 항으로 이동한다.
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/4e8dd371-8834-47b7-89b9-258186327c19)
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/fa4689ff-4ff7-4beb-8809-6b40d5b73040)
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/d95352da-9717-40e6-9780-70b994b94c4b)
+* 위의 과정들을 p나 q 둘 중에서 어느 하나가  NULL이 될 때까지 되풀이한다.  p나 q 중에서 어느 하나가 NULL이 되면 아직 남아있는 항들을 전부  C로 가져오면 된다.
+
+## 헤더 노드의 개념
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/310f4200-b696-4a07-b54b-4558e552a4f7)
+
+## 다항식 프로그램
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct ListNode {
+	int coef;
+	int expon;
+	struct ListNode* link;
+}ListNode;
+
+//연결 리스트 헤더
+typedef struct ListType {
+	int size;
+	ListNode* head;
+	ListNode* tail;
+}ListType;
+
+//오류 함수
+void error(char* message) {
+	fprintf(stderr, "%s\n", message);
+	exit(1);
+}
+
+//리스트 헤더 생성 함수
+ListType* create() {
+	ListType* plist = (ListType*)malloc(sizeof(ListType));
+	plist->size = 0;
+	plist->head = plist->tail = NULL;
+	return plist;
+}
+
+//plist는 연결 리스트의 헤더를 가리키는 포인터,  coef는 계수, expon은 지수
+void insert_last(ListType* plist, int coef, int expon) {
+	ListNode* temp = (ListNode*)malloc(sizeof(ListNode));
+	if (temp == NULL)error("메모리 할당 에러");
+	temp->coef = coef;
+	temp->expon = expon;
+	temp->link = NULL;
+	if (plist->tail == NULL) {
+		plist->head = plist->tail = temp;
+	}
+	else {
+		plist->tail->link = temp;
+		plist->tail = temp;
+	}
+	plist->size++;
+}
+
+//list3=list1+list2
+void poly_add(ListType* plist1, ListType* plist2, ListType* plist3) {
+	ListNode* a = plist1->head;
+	ListNode* b = plist2->head;
+	int sum;
+	while (a && b) {
+		if (a->expon == b->expon) {
+			sum = a->coef + b->coef;
+			if (sum != 0)insert_last(plist3, sum, a->expon);
+			a = a->link; b = b->link;
+		}
+		else if (a->expon > b->expon) {
+			insert_last(plist3, a->coef, a->expon);
+			a = a->link;
+		}
+		else {
+			insert_last(plist3, b->coef, b->expon);
+			b = b->link;
+		}
+		//a나 b중의 하나가 먼저 끝나게 되면 남아있는 항들을 모두 결과 다항식으로 복사
+		for (; a != NULL; a = a->link) {
+			insert_last(plist3, a->coef, a->expon);
+			for (; b != NULL; b = b->link) {
+				insert_last(plist3, b->coef, b->expon);
+			}
+		}
+	}
+}
+
+void poly_print(ListType *plist){
+	ListNode* p = plist->head;
+
+	printf("polynomial= ");
+	for (; p; p = p->link) {
+		printf("%d^%d+ ", p->coef, p->expon);
+	}	
+	printf("\n");
+}
+
+int main() {
+	ListType* list1, * list2, * list3;
+
+	//연결 리스트 헤더 생성
+	list1 = create();
+	list2 = create();
+	list3 = create();
+
+	//다항식 1 생성
+	insert_last(list1, 3, 12);
+	insert_last(list1, 2, 8);
+	insert_last(list1, 1, 0);
+
+	//다항식 2 생성
+	insert_last(list2, 8, 12);
+	insert_last(list2, -3, 10);
+	insert_last(list2, 10, 6);
+
+	poly_print(list1);
+	poly_print(list2);
+
+	//다항식 3 생성
+	poly_add(list1, list2, list3);
+	poly_print(list3);
+
+	free(list1); free(list2); free(list3);
+}
+```
