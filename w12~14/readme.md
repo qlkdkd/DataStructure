@@ -424,5 +424,263 @@ int main() {
 ### 수식 트리 알고리즘
 ```
 evaluate(exp):
-
+	if exp==NULL:
+		return 0;
+	else:
+	x<-evaluate(exp.left);
+	y<-evaluate(exp.right);
+	op<-exp.data;
+	return (x, op, y);
 ```
+> 설명
+> 1. 만약 수식 트리가 공백상태이면 복귀
+> 2. 그렇지 않으면 왼쪽 서브트리를 계산하기 위하여 evaluate를 다시 순환호출. 이때 매개변수는 왼쪽 자식 노드가 됨
+> 3. 똑같은 식으로 오른쪽 서브트리를 계산
+> 4. 루트노드의 데이터 필드에서 연산자를 추출
+> 5. 추출된 연산자를 가지고 연산을 수행해서 반환
+
+### 수식 트리 프로그램
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct TreeNode {
+	int data;
+	struct TreeNode* left, * right;
+}TreeNode;
+
+TreeNode n1 = { 1, NULL, NULL };
+TreeNode n2 = { 4, NULL, NULL };
+TreeNode n3 = { '*', &n1, &n2 };
+TreeNode n4 = { 16, NULL, NULL };
+TreeNode n5 = { 25, NULL, NULL };
+TreeNode n6 = { '+', &n4, &n5 };
+TreeNode n7 = { '+', &n3, &n6 };
+TreeNode* exp = &n7;
+
+//수식 계산 함수
+int evaluate(TreeNode* root) {
+	if (root == NULL)return 0;
+	if (root->left == NULL && root->right == NULL)return root->data;
+	else {
+		int op1 = evaluate(root->left);
+		int op2 = evaluate(root->right);
+		printf("%d %c %d을 계산합니다.\n", op1, root->data, op2);
+		switch (root->data) {
+			case '+': return op1 + op2;
+			case '-': return op1 - op2;
+			case '*': return op1 * op2;
+			case '/': return op1 * op2;
+		}
+	}
+	return 0;
+}
+
+int main() {
+	printf("수식의 값: %d\n", evaluate(exp));
+	return 0;
+}
+```
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/0bbae024-51d6-425e-b1ab-6c16e09ae042)
+
+## 트리의 응용: 디렉토리 용량 계산
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/b863c0d3-d0cb-4941-8b49-f1c6dbd28832)
+
+* 후위순회 사용: 하나의 디렉토리 안에 다른 디렉토리가 있을 수 있으므로 먼저 서브 디렉토리의 용량을 모두 계산한 다음 루트 디렉토리의 용량을 계산
+* 후위 순회를 사용하되 순환호출되는 순회 함수가 용량을 반환하도록 만들어야함-> 순회 함수 조금 변경
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct TreeNode {
+	int data;
+	struct TreeNode* left, * right;
+}TreeNode;
+
+int calc_dir_size(TreeNode* root) {
+	int left_size, right_size;
+	if (root == NULL) return 0;
+
+	left_size = calc_dir_size(root->left);
+	right_size = calc_dir_size(root->right);
+	return (root->data + left_size + right_size);
+}
+
+int main() {
+	TreeNode n4 = { 500, NULL, NULL };
+	TreeNode n5 = { 200, NULL, NULL };
+	TreeNode n3 = { 100, &n4, &n5 };
+	TreeNode n2 = { 50, NULL, NULL };
+	TreeNode n1 = { 0, &n2, &n3 };
+
+	printf("디렉토리의 크기=%d\n", calc_dir_size(&n1));
+	return 0;
+}
+```
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/5b8fbeed-6e90-4306-99d8-d0ae998d9781)
+
+---
+
+# 이진 트리의 추가연산
+## 이진 트리의 연산: 노드 개수
+* 탐색 트리 안의 노드의 개수를 세어 표시
+* 노드의 개수를 세기 위해서 트리 안의 노드들을 전체적으로 순환해야 함
+* 각각의 서브트리에 대하여 순환 호출한 다음, 반환되는 값에 1을 더하여 반환
+### 노드 개수 구하기 알고리즘
+```
+get_node_count(x):
+if x!=NULL: return 1+get_count(x.left)+get_count(x.right);
+```
+
+### c언어로 구현
+```c
+int get_node_count(TreeNode* node) {
+	int count = 0;
+	if (node != NULL)
+		count = 1 + get_node_count(node->left) + get_node_count(node->right);
+	return count;
+}
+```
+
+## 단말 노드 개수 구하기
+* 단말 노드의 개수를 구하려면 트리 안의 노드들을 전체적으로 순회하여야 함
+* 순회하면서 왼쪽 자식과 오른쪽 자식이 동시에 0이 되면 단말노드는 1을 반환
+* 그렇지 않으면 비단말 노드이므로 각각의 서브트리에 대하여 순환 호출한 다음, 반환되는 값을 서로 더하면 됨
+```c
+int get_node_count(TreeNode* node) {
+	int count = 0;
+	if (node != NULL)
+		count = 1 + get_node_count(node->left) + get_node_count(node->right);
+	return count;
+}
+```
+
+## 높이 구하기
+* 먼저 각 서브 트리에 대하여 순환 호출
+* 순환 호출이 끝나면 각 서브트리로부터 서브트리의 높이가 반환됨
+* 반환값중 최대값을 구하여 반환
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/f040a910-2dbb-47ba-a1c5-8e4584e49284)
+
+```c
+int get_height(TreeNode* node) {
+	int height = 0;
+	if (node != NULL)
+		height = 1 + max(get_height(node->left), get_height(node->right));
+	return height;
+}
+```
+
+---
+
+# 스레드 이진트리
+## 아이디어
+* 이진 트리의 노드에 많은 NULL값이 존재
+* 트리의 노드 개수를 n개라고 할 때, 각 노드 당 2개의 링크가 존재 -> 총 링크의 개수=2n
+* 이들 링크 중에서 n-1개의 링크들이 루트 노드를 제외한 n-1개의 다른 노드들을 가리킴
+* 2n개 중에서 n-1은 NULL링크가 아니지만 나머지 n+1개의 링크는 NULL링크임
+* -> 이들 NULL링크를 잘 사용하여 순환 호출 없이도 트리의 노드들을 순회하자
+
+## 정의
+* 스레드 이진트리: NULL링크에 중위 순회 시에 선행 노드인 중위 선행자(inorder predecessor)나 중위 순회시에 후속 노드인 중위 후속자(inorder successor)를 저장시켜 놓은 트리
+	* 즉, 실을 이용하여 노드들은 순회 순서대로 연결시켜 놓은 트리
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/ded55fec-7f55-4994-898c-729c736bb77e)
+
+## 구조체
+* NULL링크에 스레드가 저장된면 링크에 자식을 가리키는 포인터가 저장되어 있는지
+* 아니면 NULL이 저장되어야 하는데 대신 스레드가 저장되어 있는지를 구별해야할 태그 필드가 필요
+```c
+typedef struct TreeNode {
+	int data;
+	struct TreeNode* left, * right;
+	int is_thread;//만약 오른쪽 링크가 스레드이면 True(1)
+}TreeNode;
+```
+
+## 중위 후속자를 찾는 함수
+* is_thread==True: right는 중위후속자, is_thread==False: 오른쪽 자식을 가리키는 포인터
+* 스레드 이진트리가 구성되었을 때 가정하였을 경우: 노드 p의 중위후속자를 반환하는 함수 find_successor 작성
+	* p의 is_thread==True일 때, 바로 오른쪽 자식이 중위 후속자가 됨-> 오른쪽 자식 반환
+ 	* 오른쪽 자식이 NULL이면, 더이상 후속자 없음-> NULL 반환
+	* p의 is_thread==False일 때, 서브트리의 가장 왼쪽의 노드로 가야함
+```c
+TreeNode* find_successor(TreeNode* p) {
+	TreeNode* q = p->right;
+
+	if (q == NULL || p->is_thread == False) return q;
+	while (q->left != NULL) q = q->left;
+	return q;
+}
+```
+
+## 스레드 이진트리의 중위 순회 함수
+* 순회는 가장 왼쪽 노드부터 시작-> 왼쪽 자식이 NULL이 될 때까지 왼쪽 링크를 타고 이동
+* 데이터 출력-> 중위 후속자를 찾는 함수 호출-> 후속자가 NULL이 아니면 계속 루프 반복
+```c
+void thread_inorder(TreeNode* t) {
+	TreeNode* q;
+
+	q = t;
+	while (q->left)q = q->left;
+	do {
+		printf("%c-> ", q->data);
+		q = find_successor(q);
+	} while (q);
+}
+```
+
+## 테스트 프로그램
+```c
+#include<stdio.h>
+#define True 1
+#define False 0
+
+typedef struct TreeNode {
+	int data;
+	struct TreeNode* left, * right;
+	int is_thread;//만약 오른쪽 링크가 스레드이면 True(1)
+}TreeNode;
+
+//트리 구현
+TreeNode n1 = { 'A', NULL, NULL, 1 };
+TreeNode n2 = { 'B', NULL, NULL, 1 };
+TreeNode n3 = { 'C', &n1, &n2, 0 };
+TreeNode n4 = { 'D', NULL, NULL, 1 };
+TreeNode n5 = { 'E', NULL, NULL, 0 };
+TreeNode n6 = { 'F', &n4, &n5, 0 };
+TreeNode n7 = { 'G', &n3, &n6, 0 };
+TreeNode* exp = &n7;
+
+//중위 후속자 찾는 함수
+TreeNode* find_successor(TreeNode* p) {
+	TreeNode* q = p->right;
+
+	if (q == NULL || p->is_thread == True) return q;
+	while (q->left != NULL) q = q->left;
+	return q;
+}
+
+//중위 순회 함수
+void thread_inorder(TreeNode* t) {
+	TreeNode* q;
+
+	q = t;
+	while (q->left)q = q->left;
+	do {
+		printf("%c-> ", q->data);
+		q = find_successor(q);
+	} while (q);
+}
+
+int main() {
+	//스레드 설정
+	n1.right = &n3;
+	n2.right = &n7;
+	n4.right = &n6;
+
+	//중위순회
+	thread_inorder(exp);
+	printf("\n");
+	return 0;
+}
+```
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/767bad82-051b-44c0-9d86-c1a0de8142f0)
