@@ -355,3 +355,74 @@ int main() {
 
 ## 반복적 순회
 * 앞에서는 순환호출을 이용해 순환을 하였고 이게 일반적이지만, 반복을 이용해 트리순회를 할 수 있
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#include<memory.h>
+
+typedef struct TreeNode {
+	int data;
+	struct TreeNode* left, * right;
+}TreeNode;
+
+#define SIZE 100
+int top = -1;
+TreeNode* stack[SIZE];
+
+void push(TreeNode* p) {
+	if (top < SIZE - 1)
+		stack[++top] = p;
+}
+
+TreeNode* pop() {
+	TreeNode* p = NULL;
+	if (top >= -0)
+		p = stack[top--];
+	return p;
+}
+
+void inorder_iter(TreeNode* root) {
+	while (1) {
+		for (; root; root = root->left) {
+			push(root);
+		}
+		root = pop();
+		if (!root)break;
+		printf("[%d]", root->data);
+		root = root->right;
+	}
+}
+
+TreeNode n1={ 1, NULL, NULL };
+TreeNode n2 = { 4, &n1, NULL };
+TreeNode n3 = { 16, NULL, NULL };
+TreeNode n4 = { 25, NULL, NULL };
+TreeNode n5 = { 20, &n3, &n4 };
+TreeNode n6 = { 15, &n2, &n5 };
+TreeNode* root = &n6;
+
+int main() {
+	printf("중위 순회=");
+	inorder_iter(root);
+	printf("\n");
+	return 0;
+}
+```
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/347f63b6-500b-489e-9375-fa3595c509b0)
+
+## 트리의 응용: 수식 트리 처리
+* 이진 트리는 수식 트리(expression tree)를 처리하는데 사용될 수 있음
+    * 수식 트리 산술 연산자와 피연산자로 만들어짐
+	* 단말노드: 피연산자
+ 	* 비단말 노드: 연산자
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/7fa11d48-f6b5-4cac-a6ff-f8d1f916d4a5)
+* 후위 순회 사용: 루트보다 자식 노드들이 먼저 방문하는 순회 방법을 사용해야 전체 수식을 계산할 수 있음
+* 서브트리의 값을 순환호출로 계산
+* 비단말 노드를 방문할 때 양쪽 서브트리의 값을 노드에 저장된 연산자를 이용하여 계산함
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/f4aa5497-fc2a-423c-b611-dbfc77e9486b)
+
+### 수식 트리 알고리즘
+```
+evaluate(exp):
+
+```
