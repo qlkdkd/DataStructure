@@ -1,0 +1,5 @@
+﻿  FileName.c
+C:\Users\sdh05\Desktop\자료구조(usb에 넣을 것)\w11-6.linkedStack\w11-6.linkedStack\FileName.c(41,3): warning C4013: 'exit'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\sdh05\Desktop\자료구조(usb에 넣을 것)\w11-6.linkedStack\w11-6.linkedStack\FileName.c(59): warning C4715: 'peek': 모든 제어 경로에서 값을 반환하지는 않습니다.
+C:\Users\sdh05\Desktop\자료구조(usb에 넣을 것)\w11-6.linkedStack\w11-6.linkedStack\FileName.c(50): warning C4715: 'pop': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  w11-6.linkedStack.vcxproj -> C:\Users\sdh05\Desktop\자료구조(usb에 넣을 것)\w11-6.linkedStack\x64\Debug\w11-6.linkedStack.exe
