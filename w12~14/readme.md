@@ -230,3 +230,128 @@ int main() {
 > 중위순회: LVR
 > 후위순회: LRV
 ## 전위순회
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/b4511a10-eff2-42a8-a996-1ffcf80e9fa7)
+
+* 전위순회: 루트를 먼저 방문하고 그 다음에 왼쪽 서브트리를 방문하고 오른쪽 서브트리를 마지막으로 방문하는 것이다.
+1. 루드노트 방문
+2. 왼쪽 서브트리 방문
+3. 오른쪽 서브트리 방문
+
+### 트리 전회순위 알고리즘
+```
+preorder(x):
+	if x!=null:
+		print Data(x);
+		preorder(Left(x));
+		preorder(Right(x));
+```
+
+> 알고리즘 설명
+> 1. 노드 x가 NULL이면 더이상 순환호출을 하지 않음
+> 2. x의 데이터 출력
+> 3. x의 왼쪽 서브트리 순환호출하여 방문
+> 4. x의 오른쪽 서브트리 순환호출하여 방문
+
+* 방문 순서: 왼쪽 서브트리의 루트 방문-> 왼쪽 서브트리의 왼쪽 서브트리 방문-> 왼쪽 서브트리의 오른쪽 방문
+
+## 중위순회
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/cf0d7677-bd53-47ee-a4a7-b45fb30399ab)
+* 왼쪽 서브트리-> 루트노드-> 오른쪽 서브트리 순으로 방문
+
+### 트리 중위순회 알고리즘
+```
+	inorder(x)
+	if x!=NULL:
+		inorder(Left(x));
+		print Data(x);
+		inorder(Right(x));
+```
+> 알고리즘 설명
+> 1. 노드 x가 NULL이면 더이상 순환호출 하지 않음
+> 2. x의 왼쪽 서브트리 순환호출하여 방문
+> 3. x의 데이터 출력
+> 4. x의 오른쪽 서브트리 순환호출하여 방문
+
+## 후위순회
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/8e79c096-5256-494c-9194-b948c937cbd3)
+* 왼쪽 서브트리-> 오른쪽서브트리-> 루트노드 순으로 방문
+
+### 트리 후위순회 알고리즘
+```
+postorder(x):
+	if x!=NULL:
+		postorder(Left(x));
+		postorder(Right(x));
+		print Data(x);
+```
+> 알고리즘 설명
+> 1. 노드 x가 NULL이면 순환호출 x
+> 2. x의 왼쪽 서브트리 순환호출하여 방문
+> 3. x의 오른쪽 서브트리 순환호출하여 방문
+> 4. x의 데이터 출력
+
+## 전체 프로그램
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#include<memory.h>
+
+typedef struct TreeNode {
+	int data;
+	struct TreeNode* left, * right;
+}TreeNode;
+
+TreeNode n1 = { 1, NULL, NULL };
+TreeNode n2 = { 4, &n1, NULL };
+TreeNode n3 = { 16, NULL, NULL };
+TreeNode n4 = { 25, NULL, NULL };
+TreeNode n5 = { 20, &n3, &n4 };
+TreeNode n6 = { 15, &n2, &n5 };
+TreeNode* root = &n6;
+
+//중위순회
+void inorder(TreeNode* root) {
+	if (root != NULL) {
+		inorder(root->left);
+		printf("%d ", root->data);
+		inorder(root->right);
+	}
+}
+
+//전위순회
+void preorder(TreeNode* root) {
+	if (root != NULL) {
+		printf("%d ", root->data);
+		preorder(root->left);
+		preorder(root->right);
+	}
+}
+
+//후위순회
+void postorder(TreeNode* root) {
+	if (root != NULL) {
+		postorder(root->left);
+		postorder(root->right);
+		printf("%d ", root->data);
+	}
+}
+
+int main() {
+	printf("중위순회= ");
+	inorder(root);
+	printf("\n");
+
+	printf("전위순회= ");
+	preorder(root);
+	printf("\n");
+
+	printf("후위순회= ");
+	postorder(root);
+	printf("\n");
+
+	return 0;
+}
+```
+
+## 반복적 순회
+* 앞에서는 순환호출을 이용해 순환을 하였고 이게 일반적이지만, 반복을 이용해 트리순회를 할 수 있
