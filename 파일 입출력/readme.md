@@ -72,3 +72,102 @@ stderr|표준 오류 스트림|모니터의 화면
 ![image](https://github.com/qlkdkd/DataStructure/assets/71871927/00a13b1b-d95f-49c6-81f5-9008d77216e6)
 * fopen()은 주어진 파일 이름을 가지고 파일을 생성하여 이 파일을 가리키는 FILE포인터를 반환
 * FIlE구조체에는 파일의 열기, 읽기, 쓰기, 닫기에 관련된 모든 상태 정보가 들어 있음
+```c
+//형식
+int fopen(const char *name, const char *mode);
+//예
+FILE *fp;
+fp=fopen("text.txt", "w");
+//설명: name이라는 이름을 가지는 파일을 mode에 지정된 모드로 연다. FILE포인터를 반환한다.
+```
+
+#### 파일 모드
+모드|설명
+---|---
+"r"|읽기 모드로 파일을 연다.
+"w"|쓰기 모드로 파일을 생성한다. 만약 파일이 존재하지 않으면 파일이 생성된다. 파일이 이미 존재하면 기존의 내용이 지워진다.
+"a"|추가 모드로 파일을 연다. 만약 똑같은 이름의 기존의 파일이 있으면 데이터가 파일의 끝에 추가된다. 파일이 없으면 새로운 파일을 만든다.
+
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/60c0f231-fe83-436d-85dc-bf9982571344)
+
+#### 파일 닫기
+* 사용이 끝나면 반드시 파일을 닫아야 한다. 파일을 닫는 함수는 fclose()이다. fclose()는 stdio.h에 정의되어 있다.
+```c
+//형식
+int fclose(FILE *stream);
+//예
+fclose(fp);
+//설명: stream에 의하여 지정된 파일을 닫는다.
+```
+
+### 파일 입출력 예제
+```c
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+
+int main() {
+    FILE* fp = NULL;
+    fp = fopen("sample.txt", "w");
+    if (fp == NULL)printf("파일 열기 실패\n");
+    else printf("파일 읽기 성공\n");
+
+    fclose(fp);
+    return 0;
+}
+```
+
+## 3. 문자 단위 입출력
+### 한 글자씩 쓰기
+* fputc(c, fp): 문자 c를 fp에 쓴다. fp는 FILE의 포인터이다.
+```c
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+
+int main() {
+	FILE* fp = NULL;
+
+	fp = fopen("alphabet.txt", "w");//파일을 쓰기 모드로 연다
+	if (fp == NULL) {
+		fprintf(stderr, "파일 alphabet.txt를 열 수 없음\n");
+		exit(1);
+	}
+
+	char c;
+	for (c = 'a'; c <= 'z'; c++)
+		fputc(c, fp);
+	fclose(fp);
+	return 0;
+}
+```
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/ee84cbf6-6d79-482c-bd29-0d0dd52e0ccd)
+
+### 한 글자씩 읽기
+* fget(fp): fp에서 하나의 문자를 읽어서 반환. fp는 FILE의 포인터
+* EOF(End Of File): 파일의 끝을 나타내는 특수문자
+```c
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+
+int main() {
+	FILE* fp = NULL;
+	int c;//정수 변수에 주의
+
+	fp = fopen("alphabet.txt", "r");
+	if (fp == NULL) {
+		fprintf(stderr, "원본 파일 alphabet.txt를 찾을 수 없습니다.\n");
+		exit(1);
+	}
+	while ((c = fgetc(fp))!= EOF)
+		putchar(c);
+	fclose(fp);
+	return 0;
+}
+```
+![image](https://github.com/qlkdkd/DataStructure/assets/71871927/74f48cf6-6f2a-425f-85b8-e770ecdfe71c)
+
+### 한 줄씩 읽고 쓰기
+* fputs(s, fp): 문자열 s를 fp에 쓴다. fp는 FILE포인터이다.
+* fgets(fp): fp에서 한 줄을 읽어서 반환
+```c
+
+```
