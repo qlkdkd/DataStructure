@@ -1,5 +1,5 @@
-// ÇÑ¼º´ëÇĞ±³ 2023 2ÇĞ±â ÀÚ·á±¸Á¶ ±â¸»°úÁ¦ <½´ÆÃ°ÔÀÓ-°¶·¯±×>
-// 2171358 ½Å´ëÇÑ && 2393084 ±è¹Î»ó
+// í•œì„±ëŒ€í•™êµ 2023 2í•™ê¸° ìë£Œêµ¬ì¡° ê¸°ë§ê³¼ì œ <ìŠˆíŒ…ê²Œì„-ê°¤ëŸ¬ê·¸>
+// 2171358 ì‹ ëŒ€í•œ && 2393084 ê¹€ë¯¼ìƒ
 
 #include <stdio.h>
 #include <conio.h>
@@ -9,17 +9,17 @@
 #include <time.h>
 #include <math.h>
 
-#define ENEMY_NUM 3 //ÀûÀÇ ¼ö
-#define PLAYER_START_X 25 //ÇÃ·¹ÀÌ¾î ½ÃÀÛ x
-#define PLAYER_START_Y 40 //ÇÃ·¹ÀÌ¾î ½ÃÀÛ y
-#define BULLET_NUM 4 //ÇÃ·¹ÀÌ¾î°¡ µ¿½Ã¿¡ ¹ß»ç °¡´ÉÇÑ ÃÑ¾Ë ¼ö
-#define ENEMY_BULLET_NUM (ENEMY_NUM * 5) //ÀûÀÌ ¹ß»ç °¡´ÉÇÑ ÃÑ¾Ë ¼ö
+#define ENEMY_NUM 3 //ì ì˜ ìˆ˜
+#define PLAYER_START_X 25 //í”Œë ˆì´ì–´ ì‹œì‘ x
+#define PLAYER_START_Y 40 //í”Œë ˆì´ì–´ ì‹œì‘ y
+#define BULLET_NUM 4 //í”Œë ˆì´ì–´ê°€ ë™ì‹œì— ë°œì‚¬ ê°€ëŠ¥í•œ ì´ì•Œ ìˆ˜
+#define ENEMY_BULLET_NUM (ENEMY_NUM * 5) //ì ì´ ë°œì‚¬ ê°€ëŠ¥í•œ ì´ì•Œ ìˆ˜
 
-#define MAX_X 48 // ÀÌµ¿°¡´ÉÇÑ xÁÂÇ¥ÀÇ ÃÖ´ë ¹üÀ§
-#define MIN_X 2 // ÀÌµ¿°¡´ÉÇÑ xÁÂÇ¥ÀÇ ÃÖ¼Ò ¹üÀ§ 
-#define MAX_Y 40 // ÀÌµ¿°¡´ÉÇÑ yÁÂÇ¥ÀÇ ÃÖ´ë ¹üÀ§
-#define MIN_Y 2 // ÀÌµ¿°¡´ÉÇÑ yÁÂÇ¥ÀÇ ÃÖ¼Ò ¹üÀ§ 
-#define CENTER_LINE 20 // ÇÃ·¹ÀÌ¾î¿Í Àû »çÀÌÀÇ ÀÌµ¿ °æ°è
+#define MAX_X 48 // ì´ë™ê°€ëŠ¥í•œ xì¢Œí‘œì˜ ìµœëŒ€ ë²”ìœ„
+#define MIN_X 2 // ì´ë™ê°€ëŠ¥í•œ xì¢Œí‘œì˜ ìµœì†Œ ë²”ìœ„ 
+#define MAX_Y 40 // ì´ë™ê°€ëŠ¥í•œ yì¢Œí‘œì˜ ìµœëŒ€ ë²”ìœ„
+#define MIN_Y 2 // ì´ë™ê°€ëŠ¥í•œ yì¢Œí‘œì˜ ìµœì†Œ ë²”ìœ„ 
+#define CENTER_LINE 20 // í”Œë ˆì´ì–´ì™€ ì  ì‚¬ì´ì˜ ì´ë™ ê²½ê³„
 
 void gotoxy(int x, int y);
 void PrintGameTitle();
@@ -42,29 +42,29 @@ void print_hsu();
 int checking_game_end();
 void update_score();
 
-typedef struct bullet_state { //ÃÑ¾ËÀÇ ÇöÀç ÁÂÇ¥¸¦ ¾Ë·ÁÁÖ´Â ±¸Á¶Ã¼
+typedef struct bullet_state { //ì´ì•Œì˜ í˜„ì¬ ì¢Œí‘œë¥¼ ì•Œë ¤ì£¼ëŠ” êµ¬ì¡°ì²´
     int x;
     int y;
     bool exist;
 } bullet_state;
 
-typedef struct player_state { //ÇÃ·¹ÀÌ¾îÀÇ ÇöÀç »óÅÂ¸¦ ¾Ë·ÁÁÖ´Â ±¸Á¶Ã¼
+typedef struct player_state { //í”Œë ˆì´ì–´ì˜ í˜„ì¬ ìƒíƒœë¥¼ ì•Œë ¤ì£¼ëŠ” êµ¬ì¡°ì²´
     int x;
     int y;
     int health;
     int speed;
-    bool exist; //»ıÁ¸ ¿©ºÎ
+    bool exist; //ìƒì¡´ ì—¬ë¶€
 } player_state;
 
-typedef struct enemy_state { // ÀûÀÇ ÇöÀç »óÅÂ¸¦ ¾Ë·ÁÁÖ´Â ±¸Á¶Ã¼
+typedef struct enemy_state { // ì ì˜ í˜„ì¬ ìƒíƒœë¥¼ ì•Œë ¤ì£¼ëŠ” êµ¬ì¡°ì²´
     int x;
     int y;
     int health;
     int speed;
-    bool exist; // »ıÁ¸ ¿©ºÎ
+    bool exist; // ìƒì¡´ ì—¬ë¶€
 } enemy_state;
 
-int score = 0;//Á¡¼ö
+int score = 0;//ì ìˆ˜
 clock_t  lastScoreUpdateTime;
 
 player_state player;
@@ -72,17 +72,17 @@ enemy_state enemy[ENEMY_NUM];
 bullet_state bullet[BULLET_NUM];
 bullet_state enemy_bullet[ENEMY_BULLET_NUM];
 
-void StartGame() { //º» °ÔÀÓ ÄÚµå
-    printf("°ÔÀÓÀÌ ½ÃÀÛµË´Ï´Ù!\n");
-    system("cls"); // ÄÜ¼ÖÃ¢ Áö¿ì´Â ¸í·É¾î
+void StartGame() { //ë³¸ ê²Œì„ ì½”ë“œ
+    printf("ê²Œì„ì´ ì‹œì‘ë©ë‹ˆë‹¤!\n");
+    system("cls"); // ì½˜ì†”ì°½ ì§€ìš°ëŠ” ëª…ë ¹ì–´
 
-    player.x = PLAYER_START_X; //ÇÃ·¹ÀÌ¾î »óÅÂ ÃÊ±âÈ­
+    player.x = PLAYER_START_X; //í”Œë ˆì´ì–´ ìƒíƒœ ì´ˆê¸°í™”
     player.y = PLAYER_START_Y;
     player.health = 0;
     player.speed = 0;
     player.exist = true;
 
-    for (int i = 0; i < ENEMY_NUM; i++) { //Àû »óÅÂ ÃÊ±âÈ­
+    for (int i = 0; i < ENEMY_NUM; i++) { //ì  ìƒíƒœ ì´ˆê¸°í™”
         enemy[i].x = 5 + 15 * i;
         enemy[i].y = 1 + 3 * i;
         enemy[i].health = 0;
@@ -90,21 +90,21 @@ void StartGame() { //º» °ÔÀÓ ÄÚµå
         enemy[i].exist = true;
     }
 
-    lastScoreUpdateTime = clock();//¸¶Áö¸· Á¡¼ö¸¦ ÃÊ±âÈ­
+    lastScoreUpdateTime = clock();//ë§ˆì§€ë§‰ ì ìˆ˜ë¥¼ ì´ˆê¸°í™”
     while (1) {
-        print_player(player.x, player.y, player.exist); // ÇÃ·¹ÀÌ¾î Ãâ·Â
+        print_player(player.x, player.y, player.exist); // í”Œë ˆì´ì–´ ì¶œë ¥
 
-        for (int i = 0; i < ENEMY_NUM; i++) { // Àû Ãâ·Â
+        for (int i = 0; i < ENEMY_NUM; i++) { // ì  ì¶œë ¥
             print_enemy(enemy[i].x, enemy[i].y, enemy[i].exist);
         }
 
         int hit = checking_hit();
-        bullet_moving(); // ÃÑ¾Ë ÀÌµ¿ ½ÃÅ°´Â ÇÔ¼ö ÀÛµ¿
-        if (checking_game_end() == 0) break; // °ÔÀÓÀÌ ³¡³­ »óÈ²ÀÎÁö È®ÀÎÇÏ´Â ÇÔ¼ö&Á¶°Ç¹®
-        enemy_rand_moving_(); // ÀûÀ» ·£´ıÇÏ°Ô ÀÌµ¿½ÃÅ°´Â ÇÔ¼ö
-        enemy_rand_shooting(); // ÀûÀÌ ·£´ıÇÏ°Ô ÃÑ¾ËÀ» ½î´Â ÇÔ¼ö
+        bullet_moving(); // ì´ì•Œ ì´ë™ ì‹œí‚¤ëŠ” í•¨ìˆ˜ ì‘ë™
+        if (checking_game_end() == 0) break; // ê²Œì„ì´ ëë‚œ ìƒí™©ì¸ì§€ í™•ì¸í•˜ëŠ” í•¨ìˆ˜&ì¡°ê±´ë¬¸
+        enemy_rand_moving_(); // ì ì„ ëœë¤í•˜ê²Œ ì´ë™ì‹œí‚¤ëŠ” í•¨ìˆ˜
+        enemy_rand_shooting(); // ì ì´ ëœë¤í•˜ê²Œ ì´ì•Œì„ ì˜ëŠ” í•¨ìˆ˜
 
-        // ÇÃ·¹ÀÌ¾î »óÇÏÁÂ¿ì ¹æÇâÅ°·Î ÀÌµ¿ÇÏ°Ô ÇÏ´Â Á¶°Ç¹®
+        // í”Œë ˆì´ì–´ ìƒí•˜ì¢Œìš° ë°©í–¥í‚¤ë¡œ ì´ë™í•˜ê²Œ í•˜ëŠ” ì¡°ê±´ë¬¸
         if ((GetAsyncKeyState(VK_UP) & 0x0001) && (MIN_Y < player.y) && (player.y > CENTER_LINE)) {
             print_player(player.x, player.y, false);
             player.y--;
@@ -126,10 +126,10 @@ void StartGame() { //º» °ÔÀÓ ÄÚµå
             print_player(player.x, player.y, true);
         }
 
-        //½ºÆäÀÌ½º¹Ù Å°·Î ÃÑ¾Ë ¹ß»çÇÏ´Â Á¶°Ç¹®
+        //ìŠ¤í˜ì´ìŠ¤ë°” í‚¤ë¡œ ì´ì•Œ ë°œì‚¬í•˜ëŠ” ì¡°ê±´ë¬¸
         if (GetAsyncKeyState(VK_SPACE) & 0x0001) {
             int i = 0;
-            while (i < BULLET_NUM && bullet[i].exist) { //»ç¿ë ºÒ°¡´ÉÇÑ ÃÑ¾Ë ¼ö °è»êÇÏ´Â ¹İº¹¹®
+            while (i < BULLET_NUM && bullet[i].exist) { //ì‚¬ìš© ë¶ˆê°€ëŠ¥í•œ ì´ì•Œ ìˆ˜ ê³„ì‚°í•˜ëŠ” ë°˜ë³µë¬¸
                 i++;
             }
             if (i != BULLET_NUM) {
@@ -138,7 +138,7 @@ void StartGame() { //º» °ÔÀÓ ÄÚµå
                 bullet[i].exist = true;
             }
         }
-        //0.1ÃÊ¸¶´Ù 1Á¡¾¿ Ãß°¡
+        //0.1ì´ˆë§ˆë‹¤ 1ì ì”© ì¶”ê°€
         clock_t currentTime = clock();
         double elapsedSeconds = (double)(currentTime - lastScoreUpdateTime) / CLOCKS_PER_SEC;
         if (elapsedSeconds >= 0.1) {
@@ -147,7 +147,7 @@ void StartGame() { //º» °ÔÀÓ ÄÚµå
             lastScoreUpdateTime = currentTime;
         }
 
-        //Àû ÀâÀ¸¸é 100Á¡ È¹µæ
+        //ì  ì¡ìœ¼ë©´ 100ì  íšë“
         if (hit) {
             score += 100;
         }
@@ -156,22 +156,22 @@ void StartGame() { //º» °ÔÀÓ ÄÚµå
         gotoxy(0, 42);
         printf("HANSUNG UNIVERSITY DEPARTMENT OF APPLIED AI");
 
-        Sleep(20); // 0.02ÃÊ °£°İÀ¸·Î È­¸é ¾÷µ¥ÀÌÆ®
+        Sleep(20); // 0.02ì´ˆ ê°„ê²©ìœ¼ë¡œ í™”ë©´ ì—…ë°ì´íŠ¸
     }
-    Sleep(5000); // 5ÃÊ ´ë±â ÈÄ ¸ŞÀÎ ¸Ş´º·Î ³Ñ¾î°¨
+    Sleep(5000); // 5ì´ˆ ëŒ€ê¸° í›„ ë©”ì¸ ë©”ë‰´ë¡œ ë„˜ì–´ê°
 }
 
-void gotoxy(int x, int y) { //Ä¿¼­¸¦ Æ¯Á¤ ÁÂÇ¥·Î ÀÌµ¿½ÃÅ°´Â ÇÔ¼ö
+void gotoxy(int x, int y) { //ì»¤ì„œë¥¼ íŠ¹ì • ì¢Œí‘œë¡œ ì´ë™ì‹œí‚¤ëŠ” í•¨ìˆ˜
     COORD coord;
     coord.X = x;
     coord.Y = y;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
-void print_player(int x, int y, bool exist) { // ÇÃ·¹ÀÌ¾î¸¦ È­¸é¿¡ Ãâ·ÂÇÏ´Â ÇÔ¼ö
+void print_player(int x, int y, bool exist) { // í”Œë ˆì´ì–´ë¥¼ í™”ë©´ì— ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
     if (exist == true) {
-        gotoxy(x, y); printf("¡Û");
-        gotoxy(x - 2, y + 1); printf("¡Ş¡â¡Ş");
+        gotoxy(x, y); printf("â—‹");
+        gotoxy(x - 2, y + 1); printf("â—‡â–³â—‡");
     }
 
     if (exist != true) {
@@ -180,10 +180,10 @@ void print_player(int x, int y, bool exist) { // ÇÃ·¹ÀÌ¾î¸¦ È­¸é¿¡ Ãâ·ÂÇÏ´Â ÇÔ¼ö
     }
 }
 
-void print_enemy(int x, int y, bool exist) { // ÀûÀ» È­¸é¿¡ Ãâ·ÂÇÏ´Â ÇÔ¼ö
+void print_enemy(int x, int y, bool exist) { // ì ì„ í™”ë©´ì— ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
     if (exist == true) {
-        gotoxy(x - 2, y - 1); printf("¡ß¡å¡ß");
-        gotoxy(x, y); printf("¡Ü");
+        gotoxy(x - 2, y - 1); printf("â—†â–¼â—†");
+        gotoxy(x, y); printf("â—");
     }
 
     if (exist != true) {
@@ -192,10 +192,10 @@ void print_enemy(int x, int y, bool exist) { // ÀûÀ» È­¸é¿¡ Ãâ·ÂÇÏ´Â ÇÔ¼ö
     }
 }
 
-void print_bullet(int x, int y, bool exist) { // ÇÃ·¹ÀÌ¾îÀÇ ÃÑ¾ËÀ» È­¸é¿¡ Ãâ·ÂÇÏ´Â ÇÔ¼ö
+void print_bullet(int x, int y, bool exist) { // í”Œë ˆì´ì–´ì˜ ì´ì•Œì„ í™”ë©´ì— ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
     if (exist == true) {
         gotoxy(x, y);
-        printf("¡ü");
+        printf("âˆ§");
     }
 
     if (exist != true) {
@@ -204,7 +204,7 @@ void print_bullet(int x, int y, bool exist) { // ÇÃ·¹ÀÌ¾îÀÇ ÃÑ¾ËÀ» È­¸é¿¡ Ãâ·ÂÇÏ
     }
 }
 
-void print_enemy_bullet(int x, int y, bool exist) { // ÀûÀÇ ÃÑ¾ËÀ» È­¸é¿¡ Ãâ·ÂÇÏ´Â ÇÔ¼ö
+void print_enemy_bullet(int x, int y, bool exist) { // ì ì˜ ì´ì•Œì„ í™”ë©´ì— ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
     if (exist == true) {
         gotoxy(x, y);
         printf("v");
@@ -216,9 +216,9 @@ void print_enemy_bullet(int x, int y, bool exist) { // ÀûÀÇ ÃÑ¾ËÀ» È­¸é¿¡ Ãâ·ÂÇÏ
     }
 }
 
-void bullet_moving() { // ÃÑ¾Ë ÀÌµ¿½ÃÅ°´Â ÇÔ¼ö
+void bullet_moving() { // ì´ì•Œ ì´ë™ì‹œí‚¤ëŠ” í•¨ìˆ˜
     int i, j;
-    //ÇÃ·¹ÀÌ¾îÀÇ ÃÑ¾Ë ÀÌµ¿
+    //í”Œë ˆì´ì–´ì˜ ì´ì•Œ ì´ë™
     for (i = 0; i < BULLET_NUM; i++) {
         print_bullet(bullet[i].x, bullet[i].y, false);
         if (bullet[i].y == 0) {
@@ -230,7 +230,7 @@ void bullet_moving() { // ÃÑ¾Ë ÀÌµ¿½ÃÅ°´Â ÇÔ¼ö
         }
     }
 
-    //ÀûÀÇ ÃÑ¾Ë ÀÌµ¿
+    //ì ì˜ ì´ì•Œ ì´ë™
     for (j = 0; j < ENEMY_BULLET_NUM; j++) {
         print_enemy_bullet(enemy_bullet[j].x, enemy_bullet[j].y, false);
         if (enemy_bullet[j].y == 42) {
@@ -243,9 +243,9 @@ void bullet_moving() { // ÃÑ¾Ë ÀÌµ¿½ÃÅ°´Â ÇÔ¼ö
     }
 }
 
-int checking_hit() { // ÃÑ¾Ë ÇÇ°İ ÆÇÁ¤ ´ã´çÇÏ´Â ÇÔ¼ö
+int checking_hit() { // ì´ì•Œ í”¼ê²© íŒì • ë‹´ë‹¹í•˜ëŠ” í•¨ìˆ˜
     int hit = 0;
-    //ÀûÀÇ ÇÇ°İ ÆÇÁ¤
+    //ì ì˜ í”¼ê²© íŒì •
     int i = 0, j = 0, p = 0;
     for (i = 0; i < ENEMY_NUM; i++) {
         for (j = 0; j < BULLET_NUM; j++) {
@@ -257,7 +257,7 @@ int checking_hit() { // ÃÑ¾Ë ÇÇ°İ ÆÇÁ¤ ´ã´çÇÏ´Â ÇÔ¼ö
         }
     }
 
-    //ÇÃ·¹ÀÌ¾îÀÇ ÇÇ°İ ÆÇÁ¤
+    //í”Œë ˆì´ì–´ì˜ í”¼ê²© íŒì •
     for (p = 0; p < ENEMY_BULLET_NUM; p++) {
         if ((p < ENEMY_BULLET_NUM) && (enemy_bullet[p].x == player.x) && (enemy_bullet[p].y == player.y) && (enemy_bullet[p].exist == true) && (player.exist == true)) {
             bullet[p].exist = false;
@@ -267,7 +267,7 @@ int checking_hit() { // ÃÑ¾Ë ÇÇ°İ ÆÇÁ¤ ´ã´çÇÏ´Â ÇÔ¼ö
     return hit;
 }
 
-void enemy_rand_moving_() { // ÀûÀ» ·£´ıÀ¸·Î ÀÌµ¿½ÃÅ°´Â ÇÔ¼ö
+void enemy_rand_moving_() { // ì ì„ ëœë¤ìœ¼ë¡œ ì´ë™ì‹œí‚¤ëŠ” í•¨ìˆ˜
     srand((unsigned int)time(NULL));
     int rand_x, rand_y;
     int i = 0;
@@ -276,7 +276,7 @@ void enemy_rand_moving_() { // ÀûÀ» ·£´ıÀ¸·Î ÀÌµ¿½ÃÅ°´Â ÇÔ¼ö
         rand_x = (rand() % 3) - 1; // x = -1, 0, 1
         rand_y = (rand() % 3) - 1; // y = -1, 0, 1
 
-        //ÀÌµ¿ °¡´ÉÇÑ xy¹üÀ§ÀÇ ÃÖ´ë°ªÀ» ³ÑÁö ¾Ê´Â °æ¿ì¿¡¸¸ ÀÌµ¿ÇÏ´Â Á¶°Ç¹®
+        //ì´ë™ ê°€ëŠ¥í•œ xyë²”ìœ„ì˜ ìµœëŒ€ê°’ì„ ë„˜ì§€ ì•ŠëŠ” ê²½ìš°ì—ë§Œ ì´ë™í•˜ëŠ” ì¡°ê±´ë¬¸
         if (enemy[i].exist == true) {
             print_enemy(enemy[i].x, enemy[i].y, false);
             if (((enemy[i].x + rand_x) > MIN_X + 3) && ((enemy[i].x + rand_x) < MAX_X - 3)) {
@@ -291,17 +291,17 @@ void enemy_rand_moving_() { // ÀûÀ» ·£´ıÀ¸·Î ÀÌµ¿½ÃÅ°´Â ÇÔ¼ö
     }
 }
 
-void enemy_rand_shooting() { //ÀûÀÌ ·£´ıÀ¸·Î ÃÑ¾ËÀ» ¹ß»çÇÏ´Â ÇÔ¼ö
+void enemy_rand_shooting() { //ì ì´ ëœë¤ìœ¼ë¡œ ì´ì•Œì„ ë°œì‚¬í•˜ëŠ” í•¨ìˆ˜
     srand((unsigned int)time(NULL));
     int i = 0;
     int r_num;
 
-    while (i < ENEMY_BULLET_NUM && enemy_bullet[i].exist) { //»ç¿ë ºÒ°¡´ÉÇÑ ÃÑ¾Ë ¼ö °è»êÇÏ´Â ¹İº¹¹®
+    while (i < ENEMY_BULLET_NUM && enemy_bullet[i].exist) { //ì‚¬ìš© ë¶ˆê°€ëŠ¥í•œ ì´ì•Œ ìˆ˜ ê³„ì‚°í•˜ëŠ” ë°˜ë³µë¬¸
         i++;
     }
     if (i != ENEMY_BULLET_NUM) {
         while (i == 0) {
-            r_num = rand() % ENEMY_NUM; //ÀûÀÇ ÀÎµ¦½º¸¦ ·£´ıÀ¸·Î ¼±ÅÃ
+            r_num = rand() % ENEMY_NUM; //ì ì˜ ì¸ë±ìŠ¤ë¥¼ ëœë¤ìœ¼ë¡œ ì„ íƒ
             if (enemy[r_num].exist == true) {
                 enemy_bullet[i].x = enemy[r_num].x;
                 enemy_bullet[i].y = enemy[r_num].y - 2;
@@ -318,27 +318,27 @@ void update_score() {
 }
 
 
-int checking_game_end() { // °ÔÀÓÀÌ ³¡³­ »óÈ²ÀÎÁö È®ÀÎÇÏ´Â ÇÔ¼ö
-    if (player.exist != true) { //ÇÃ·¹ÀÌ¾îÀÇ ÆĞ¹è¸¦ È®ÀÎÇÏ´Â Á¶°Ç¹®
-        system("cls"); // È­¸é Áö¿ì±â
-        print_gameover(); // °ÔÀÓ ¿À¹ö È­¸é Ãâ·Â
+int checking_game_end() { // ê²Œì„ì´ ëë‚œ ìƒí™©ì¸ì§€ í™•ì¸í•˜ëŠ” í•¨ìˆ˜
+    if (player.exist != true) { //í”Œë ˆì´ì–´ì˜ íŒ¨ë°°ë¥¼ í™•ì¸í•˜ëŠ” ì¡°ê±´ë¬¸
+        system("cls"); // í™”ë©´ ì§€ìš°ê¸°
+        print_gameover(); // ê²Œì„ ì˜¤ë²„ í™”ë©´ ì¶œë ¥
         return 0;
     }
 
     int i = 0;
-    while (i < ENEMY_NUM && !enemy[i].exist) { //Á¦°ÅÇÑ Àû ¼ıÀÚ °è»êÇÏ´Â ¹İº¹¹®
+    while (i < ENEMY_NUM && !enemy[i].exist) { //ì œê±°í•œ ì  ìˆ«ì ê³„ì‚°í•˜ëŠ” ë°˜ë³µë¬¸
         i++;
     }
-    if (i == ENEMY_NUM) { //ÇÃ·¹ÀÌ¾îÀÇ ½Â¸®¸¦ È®ÀÎÇÏ´Â Á¶°Ç¹®
-        system("cls"); // È­¸é Áö¿ì±â
-        print_win(); // °ÔÀÓ ½Â¸® È­¸é Ãâ·Â
+    if (i == ENEMY_NUM) { //í”Œë ˆì´ì–´ì˜ ìŠ¹ë¦¬ë¥¼ í™•ì¸í•˜ëŠ” ì¡°ê±´ë¬¸
+        system("cls"); // í™”ë©´ ì§€ìš°ê¸°
+        print_win(); // ê²Œì„ ìŠ¹ë¦¬ í™”ë©´ ì¶œë ¥
         return 0;
     }
 
     return 1;
 }
 
-void print_gameover() { // °ÔÀÓ¿À¹ö È­¸é Ãâ·ÂÇÏ´Â ÇÔ¼ö 
+void print_gameover() { // ê²Œì„ì˜¤ë²„ í™”ë©´ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜ 
     int start_x, start_y, length;
     length = 26;
 
@@ -376,7 +376,7 @@ void print_gameover() { // °ÔÀÓ¿À¹ö È­¸é Ãâ·ÂÇÏ´Â ÇÔ¼ö
     printf(" ###     #    #####  #   #");
 }
 
-void print_win() { // ½Â¸® È­¸é Ãâ·ÂÇÏ´Â ÇÔ¼ö
+void print_win() { // ìŠ¹ë¦¬ í™”ë©´ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
     int start_x, start_y, length;
     length = 19;
 
@@ -414,7 +414,7 @@ void print_win() { // ½Â¸® È­¸é Ãâ·ÂÇÏ´Â ÇÔ¼ö
     printf("#   #   ###   #   #");
 }
 
-void print_hsu() { // HSU Ãâ·ÂÇÏ´Â ÇÔ¼ö
+void print_hsu() { // HSU ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
     int start_x, start_y, length;
     length = 19;
 
@@ -437,7 +437,7 @@ void print_hsu() { // HSU Ãâ·ÂÇÏ´Â ÇÔ¼ö
     printf("#   #   ###    ### ");
 }
 
-void PrintGameTitle() { // Å¸ÀÌÆ² Ãâ·ÂÇÏ´Â ÇÔ¼ö
+void PrintGameTitle() { // íƒ€ì´í‹€ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
     int title_x;
 
     title_x = (52 - 23) / 2;
@@ -462,22 +462,22 @@ void game_manual() {
     start_y = 15;
 
     gotoxy(start_x, start_y);
-    printf("ÇÑ¼º °¶·¯±×ÀÇ Á¶ÀÛ¹ıÀ» ¼³¸íÇÏ°Ú½À´Ï´Ù.");
+    printf("í•œì„± ê°¤ëŸ¬ê·¸ì˜ ì¡°ì‘ë²•ì„ ì„¤ëª…í•˜ê² ìŠµë‹ˆë‹¤.");
     gotoxy(start_x, start_y + 2);
-    printf("»óÇÏÁÂ¿ì ¹æÇâÅ°·Î ¿ìÁÖ¼±À» Á¶ÀÛÇÕ´Ï´Ù.");
+    printf("ìƒí•˜ì¢Œìš° ë°©í–¥í‚¤ë¡œ ìš°ì£¼ì„ ì„ ì¡°ì‘í•©ë‹ˆë‹¤.");
     gotoxy(start_x, start_y + 4);
-    printf("½ºÆäÀÌ½º¹Ù ¹öÆ°À¸·Î ÃÑ¾ËÀ» ¹ß»çÇÕ´Ï´Ù.");
+    printf("ìŠ¤í˜ì´ìŠ¤ë°” ë²„íŠ¼ìœ¼ë¡œ ì´ì•Œì„ ë°œì‚¬í•©ë‹ˆë‹¤.");
     gotoxy(start_x, start_y + 6);
-    printf("Àû ¿ìÁÖ¼±À» ¸ğµÎ °İÃßÇÏ¸é ½Â¸®ÇÕ´Ï´Ù.");
+    printf("ì  ìš°ì£¼ì„ ì„ ëª¨ë‘ ê²©ì¶”í•˜ë©´ ìŠ¹ë¦¬í•©ë‹ˆë‹¤.");
     Sleep(5000);
 }
 
 void QuitGame() {
-    printf("°ÔÀÓÀ» Á¾·áÇÕ´Ï´Ù.\n");
+    printf("ê²Œì„ì„ ì¢…ë£Œí•©ë‹ˆë‹¤.\n");
     exit(0);
 }
 
-void hide_cursor(int num) { //Ä¿¼­ ¼û±â´Â ÇÔ¼ö
+void hide_cursor(int num) { //ì»¤ì„œ ìˆ¨ê¸°ëŠ” í•¨ìˆ˜
     CONSOLE_CURSOR_INFO console_cursor;
     HANDLE handle_console = GetStdHandle(STD_OUTPUT_HANDLE);
 
@@ -486,7 +486,7 @@ void hide_cursor(int num) { //Ä¿¼­ ¼û±â´Â ÇÔ¼ö
     SetConsoleCursorInfo(handle_console, &console_cursor);
 }
 
-void start_menu() { //½ÃÀÛ ¸Ş´º Ãâ·ÂÇÏ´Â ÇÔ¼ö
+void start_menu() { //ì‹œì‘ ë©”ë‰´ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
     int choice = 1;
     char key;
     int menuX, menuY;
@@ -497,16 +497,16 @@ void start_menu() { //½ÃÀÛ ¸Ş´º Ãâ·ÂÇÏ´Â ÇÔ¼ö
         menuX = (52 - 12) / 2;
         menuY = (42 - 4) / 2;
 
-        PrintGameTitle(); // °ÔÀÓ Á¦¸ñ Ãâ·Â
+        PrintGameTitle(); // ê²Œì„ ì œëª© ì¶œë ¥
 
         gotoxy(menuX, menuY);
-        printf("1. °ÔÀÓ ½ÃÀÛ");
+        printf("1. ê²Œì„ ì‹œì‘");
         if (choice == 1) printf(" <--");
         gotoxy(menuX, menuY + 1);
-        printf("2. °ÔÀÓ ¹æ¹ı");
+        printf("2. ê²Œì„ ë°©ë²•");
         if (choice == 2) printf(" <--");
         gotoxy(menuX, menuY + 2);
-        printf("3. Á¾·á");
+        printf("3. ì¢…ë£Œ");
         if (choice == 3) printf(" <--");
 
         key = _getch();
@@ -524,7 +524,7 @@ void start_menu() { //½ÃÀÛ ¸Ş´º Ãâ·ÂÇÏ´Â ÇÔ¼ö
                 StartGame();
                 break;
             case 2:
-                //printf("°ÔÀÓ ¹æ¹ı\n");
+                //printf("ê²Œì„ ë°©ë²•\n");
                 game_manual();
                 break;
             case 3:
@@ -540,7 +540,7 @@ int main() {
     hide_cursor(0);
     system("cls");
     system("title 2023_Hansung_Galaga");
-    system("mode con: cols=52 lines=43"); // 52Çà 43¿­ 
+    system("mode con: cols=52 lines=43"); // 52í–‰ 43ì—´ 
 
     lastScoreUpdateTime - clock();
     start_menu();
